@@ -5,6 +5,8 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
+import { ApiResponse } from 'src/interfaces/ApiResponse';
+
 @Injectable({
   providedIn: 'root',
 })

@@ -1,3 +1,3 @@
-interface ApiResponse {
+export interface ApiResponse {
   token: string;
 }
