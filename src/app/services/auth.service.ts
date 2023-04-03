@@ -7,11 +7,13 @@ import { catchError, tap } from 'rxjs/operators';
 
 import { ApiResponse } from 'src/interfaces/ApiResponse';
 
+import { apiUrl } from '../constants/apiUrl';
+
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private baseUrl: string = 'http://localhost:3000/api/auth';
+  private baseUrl: string = `${apiUrl}/auth`;
 
   constructor(
     private http: HttpClient,
@@ -42,8 +44,16 @@ export class AuthService {
     );
   }
 
-  signup(name: string, password: string): Observable<any> {
-    const body = { name, password };
+  signup(signupData: {
+    email: string;
+    password: string;
+    login: string;
+  }): Observable<any> {
+    const body = {
+      email: signupData.email,
+      password: signupData.password,
+      login: signupData.login,
+    };
 
     return this.http.post<ApiResponse>(`${this.baseUrl}/signup`, body).pipe(
       tap((res: ApiResponse) => {
