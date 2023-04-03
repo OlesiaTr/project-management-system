@@ -1,0 +1,3 @@
+interface ApiResponse {
+  token: string;
+}

@@ -104,7 +104,7 @@
 - [ ] Localization **20 points**
 - [ ] Backend is deployed and publicly available **10 points**
 
-### Additional functionality - 30 points
+### Additiona functionality - 30 points
 
 - [ ] Implemented additional functionality that is not provided for by current requirements **30 points**
 
