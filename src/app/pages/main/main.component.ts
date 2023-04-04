@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Observable, map } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 import { ConfirmationModalComponent } from 'src/app/components/confirmation-modal/confirmation-modal.component';
 import { Board } from 'src/app/constants/boardClass';
 import { BoardService } from 'src/app/services/board.service';
@@ -58,6 +59,7 @@ export class MainComponent implements OnInit {
   filterBoards(): void {
     this.boards$
       .pipe(
+        debounceTime(500),
         map((boards: Board[]) =>
           boards.filter((board: Board) => {
             const searchFields = [
