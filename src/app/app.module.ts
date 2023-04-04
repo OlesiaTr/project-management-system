@@ -19,6 +19,7 @@ import { SigninComponent } from './components/signin/signin.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { MainComponent } from './pages/main/main.component';
 import { ConfirmationModalComponent } from './components/confirmation-modal/confirmation-modal.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { ConfirmationModalComponent } from './components/confirmation-modal/conf
     SignupComponent,
     MainComponent,
     ConfirmationModalComponent,
+    FooterComponent,
   ],
   imports: [
     AppRoutingModule,
