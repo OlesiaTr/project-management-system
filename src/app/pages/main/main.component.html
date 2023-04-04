@@ -1,10 +1,18 @@
 <h1>Boards</h1>
 
-<div class="board-list">
-  <div *ngFor="let board of boards$ | async" class="board-item">
-    <a routerLink="/boards/{{board.id}}">{{board.title}}</a>
+<input type="text" [(ngModel)]="searchTerm" placeholder="Search">
+<button (click)="clearSearch()">Clear</button>
+
+<ul class="board-list">
+  <li *ngFor="let board of filteredBoards" class="board-item">
+    <a routerLink="/boards/{{board.id}}">
+      <h2>{{board.title}}</h2>
+      <p>{{board.description}}</p>
+      <p>Created on {{board.createdAt | date}}</p>
+      <p>Created by {{board.createdBy}}</p>
+    </a>
     <button (click)="deleteBoard(board.id)">Delete</button>
-  </div>
-</div>
+  </li>
+</ul>
 
 <app-confirmation-modal #confirmationModal></app-confirmation-modal>

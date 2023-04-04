@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { ConfirmationModalComponent } from 'src/app/components/confirmation-modal/confirmation-modal.component';
 import { Board } from 'src/app/constants/boardClass';
 import { BoardService } from 'src/app/services/board.service';
@@ -12,6 +12,8 @@ import { ToastService } from 'src/app/services/toast.service';
 })
 export class MainComponent implements OnInit {
   boards$: Observable<Board[]> = new Observable<Board[]>();
+  filteredBoards: Board[] = [];
+  searchTerm: string = '';
   @ViewChild('confirmationModal', { static: false })
   confirmationModal!: ConfirmationModalComponent;
 
@@ -22,6 +24,11 @@ export class MainComponent implements OnInit {
 
   ngOnInit(): void {
     this.boards$ = this.boardService.getBoards();
+
+    this.boards$.subscribe((boards) => {
+      this.filteredBoards = boards;
+      this.filterBoards();
+    });
   }
 
   deleteBoard(id: string) {
@@ -41,5 +48,34 @@ export class MainComponent implements OnInit {
         },
       });
     };
+  }
+
+  clearSearch() {
+    this.searchTerm = '';
+    this.filterBoards();
+  }
+
+  filterBoards(): void {
+    this.boards$
+      .pipe(
+        map((boards: Board[]) =>
+          boards.filter((board: Board) => {
+            const searchFields = [
+              board.id.toString(),
+              board.title,
+              board.description,
+              board.createdAt.toString(),
+              board.createdBy,
+            ];
+            return searchFields
+              .join(' ')
+              .toLowerCase()
+              .includes(this.searchTerm.toLowerCase());
+          })
+        )
+      )
+      .subscribe((filteredBoards) => {
+        this.filteredBoards = filteredBoards;
+      });
   }
 }

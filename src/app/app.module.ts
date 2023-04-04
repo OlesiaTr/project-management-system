@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import {
@@ -30,7 +31,7 @@ import { ConfirmationModalComponent } from './components/confirmation-modal/conf
   imports: [
     AppRoutingModule,
     BrowserModule,
-
+    FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
     RouterModule,

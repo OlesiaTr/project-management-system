@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 
 import { ToastrService, IndividualConfig } from 'ngx-toastr';
+import { Network } from '@ionic-native/network/ngx';
+import { Platform } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +17,11 @@ export class ToastService {
     disableTimeOut: false,
   };
 
-  constructor(private toastr: ToastrService) {}
+  constructor(
+    private toastr: ToastrService,
+    private network: Network,
+    private platform: Platform
+  ) {}
 
   showSuccess(msg: string, title: string = 'Success') {
     this.toastr.success(msg, title, this.toastConfig);
@@ -31,5 +37,25 @@ export class ToastService {
 
   showWarning(msg: string, title: string = 'Warning') {
     this.toastr.warning(msg, title, this.toastConfig);
+  }
+
+  showNetworkError() {
+    if (this.platform.is('cordova')) {
+      this.network.onDisconnect().subscribe(() => {
+        this.showError(
+          'Oops! Something went wrong. Please check your internet connection or try again later.'
+        );
+      });
+    } else {
+      window.addEventListener('offline', () => {
+        this.showError(
+          'Oops! Something went wrong. Please check your internet connection or try again later.'
+        );
+      });
+    }
+  }
+
+  showInputError() {
+    this.showError('Please fill in all required fields.');
   }
 }

@@ -10,7 +10,13 @@ export function handleError<T>(
     return caught.pipe(
       tap(() => console.error),
       catchError((error) => {
-        toast.showError(`${operation} failed: ${error.message}`);
+        if (error.status === 0) {
+          toast.showError(`${operation} failed: Server is offline`);
+        } else if (error.status >= 400 && error.status < 500) {
+          toast.showError(`${operation} failed: ${error.error}`);
+        } else {
+          toast.showError(`${operation} failed: ${error.message}`);
+        }
         return of(result);
       })
     );
