@@ -1,14 +1,17 @@
 export class Board {
-  id: number;
+  id: string;
   title: string;
   description: string;
   createdBy: string;
   createdAt: Date;
 
-  constructor(id: number,  title: string,
-  description: string,
-  createdBy: string,
-    createdAt: Date) {
+  constructor(
+    id: string,
+    title: string,
+    description: string,
+    createdBy: string,
+    createdAt: Date
+  ) {
     this.id = id;
     this.title = title;
     this.description = description;

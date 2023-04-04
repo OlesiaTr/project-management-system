@@ -1,1 +1,10 @@
-<p>main works!</p>
+<h1>Boards</h1>
+
+<div class="board-list">
+  <div *ngFor="let board of boards$ | async" class="board-item">
+    <a routerLink="/boards/{{board.id}}">{{board.title}}</a>
+    <button (click)="deleteBoard(board.id)">Delete</button>
+  </div>
+</div>
+
+<app-confirmation-modal #confirmationModal></app-confirmation-modal>
