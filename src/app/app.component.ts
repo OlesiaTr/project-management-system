@@ -7,8 +7,7 @@ import { AuthService } from './services/auth.service';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: [
-    './app.component.scss',
-    '../../node_modules/ngx-toastr/toastr.css',
+    './app.component.scss'
   ],
 })
 export class AppComponent {
@@ -20,7 +19,7 @@ export class AppComponent {
     const token = this.authService.getToken();
 
     if (token && !this.authService.isTokenExpired(token)) {
-      this.router.navigate(['projects']);
+      this.router.navigate(['/main']);
     } else {
       this.authService.signout();
       this.router.navigate(['/welcome']);

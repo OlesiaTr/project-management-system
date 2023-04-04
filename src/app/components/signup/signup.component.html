@@ -8,11 +8,11 @@
         <div class="card-body">
           <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
             <div class="form-group">
-              <label>Email address</label>
-              <input type="email" formControlName="email" class="form-control">
-              <div *ngIf="isSubmitted && signupForm.controls['email'].errors" class="invalid-feedback">
-                <div *ngIf="signupForm.controls['email'].errors['required']">Email is required</div>
-                <div *ngIf="signupForm.controls['email'].errors['email']">Invalid email format</div>
+              <label>Your name</label>
+              <input type="text" formControlName="name" class="form-control">
+              <div *ngIf="isSubmitted && signupForm.controls['name'].errors" class="invalid-feedback">
+                <div *ngIf="signupForm.controls['name'].errors['required']">Name is required</div>
+                <div *ngIf="signupForm.controls['name'].errors['name']">Invalid name format</div>
               </div>
             </div>
             <div class="form-group">
@@ -27,8 +27,12 @@
               <input type="password" formControlName="password" class="form-control">
               <div *ngIf="isSubmitted && signupForm.controls['password'].errors" class="invalid-feedback">
                 <div *ngIf="signupForm.controls['password'].errors['required']">Password is required</div>
-                <div *ngIf="signupForm.controls['password'].errors['minlength']">Password should be at least 6
+                <div *ngIf="signupForm.controls['password'].errors['minlength']">Password should be at least
+                  {{signupForm.controls['password'].errors['minlength'].requiredLength}}
                   characters long
+                </div>
+                <div *ngIf="signupForm.controls['password'].errors['pattern']">
+                  Password must contain at least one letter and one number.
                 </div>
               </div>
             </div>

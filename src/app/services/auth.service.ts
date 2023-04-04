@@ -8,6 +8,7 @@ import { catchError, tap } from 'rxjs/operators';
 import { ApiResponse } from 'src/interfaces/ApiResponse';
 
 import { apiUrl } from '../constants/apiUrl';
+import { ToastService } from './toast.service';
 
 @Injectable({
   providedIn: 'root',
@@ -18,39 +19,43 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private router: Router,
-    private jwtHelper: JwtHelperService
+    private jwtHelper: JwtHelperService,
+    private toast: ToastService
   ) {}
 
   private handleError<T>(operation: string = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);
 
-      console.log(`${operation} failed: ${error.message}`);
+      this.toast.showError(`${operation} failed: ${error.message}`);
 
       return of(result as T);
     };
   }
 
-  signin(name: string, password: string): Observable<any> {
-    const body = { name, password };
+  signin(login: string, password: string): Observable<any> {
+    const body = { login, password };
 
     return this.http.post<ApiResponse>(`${this.baseUrl}/signin`, body).pipe(
       tap((res: ApiResponse) => {
         console.log('res:', res);
-        const token = res.token;
-        localStorage.setItem('token', token);
+        if (res.token) {
+          const token = `Bearer ${res.token}`;
+          localStorage.setItem('token', token);
+        }
       }),
       catchError(this.handleError('signin'))
     );
   }
 
   signup(signupData: {
-    email: string;
+    name: string;
     password: string;
     login: string;
   }): Observable<any> {
+    console.log('signup function');
     const body = {
-      email: signupData.email,
+      name: signupData.name,
       password: signupData.password,
       login: signupData.login,
     };
