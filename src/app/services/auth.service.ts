@@ -9,6 +9,7 @@ import { ApiResponse } from 'src/interfaces/ApiResponse';
 
 import { apiUrl } from '../constants/apiUrl';
 import { ToastService } from './toast.service';
+import { handleError } from '../utils/handleError';
 
 @Injectable({
   providedIn: 'root',
@@ -23,16 +24,6 @@ export class AuthService {
     private toast: ToastService
   ) {}
 
-  private handleError<T>(operation: string = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-      console.error(error);
-
-      this.toast.showError(`${operation} failed: ${error.message}`);
-
-      return of(result as T);
-    };
-  }
-
   signin(login: string, password: string): Observable<any> {
     const body = { login, password };
 
@@ -44,7 +35,7 @@ export class AuthService {
           localStorage.setItem('token', token);
         }
       }),
-      catchError(this.handleError('signin'))
+      catchError(handleError(this.toast, 'signin'))
     );
   }
 
@@ -66,7 +57,7 @@ export class AuthService {
         const token = res.token;
         localStorage.setItem('token', token);
       }),
-      catchError(this.handleError('signup'))
+      catchError(handleError(this.toast, 'signup'))
     );
   }
 

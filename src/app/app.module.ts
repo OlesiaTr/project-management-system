@@ -15,6 +15,7 @@ import { AppComponent } from './app.component';
 import { WelcomeComponent } from './pages/welcome/welcome.component';
 import { SigninComponent } from './components/signin/signin.component';
 import { SignupComponent } from './components/signup/signup.component';
+import { MainComponent } from './pages/main/main.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { SignupComponent } from './components/signup/signup.component';
     WelcomeComponent,
     SigninComponent,
     SignupComponent,
+    MainComponent,
   ],
   imports: [
     AppRoutingModule,
