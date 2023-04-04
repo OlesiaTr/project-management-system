@@ -10,13 +10,12 @@ import { ApiResponse } from 'src/interfaces/ApiResponse';
 import { apiUrl } from '../constants/apiUrl';
 import { ToastService } from './toast.service';
 import { handleError } from '../utils/handleError';
+import { User } from 'src/interfaces/User';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private baseUrl: string = `${apiUrl}/auth`;
-
   constructor(
     private http: HttpClient,
     private router: Router,
@@ -27,7 +26,7 @@ export class AuthService {
   signin(login: string, password: string): Observable<any> {
     const body = { login, password };
 
-    return this.http.post<ApiResponse>(`${this.baseUrl}/signin`, body).pipe(
+    return this.http.post<ApiResponse>(`${apiUrl}/auth/signin`, body).pipe(
       tap((res: ApiResponse) => {
         console.log('res:', res);
         if (res.token) {
@@ -51,18 +50,53 @@ export class AuthService {
       login: signupData.login,
     };
 
-    return this.http.post<ApiResponse>(`${this.baseUrl}/signup`, body).pipe(
+    return this.http.post<ApiResponse>(`${apiUrl}/auth/signup`, body).pipe(
       tap((res: ApiResponse) => {
-        console.log('res:', res);
-        const token = res.token;
-        localStorage.setItem('token', token);
+        console.log('res:', res._id);
+
+        const userId = res._id;
+        localStorage.setItem('userId', userId);
       }),
       catchError(handleError(this.toast, 'signup'))
     );
   }
 
+  getUser(id: string): Observable<any> {
+    return this.http.get<ApiResponse>(`${apiUrl}/users/${id}`).pipe(
+      tap((res: ApiResponse) => {
+        console.log('res:', res);
+        const token = res.token;
+        localStorage.setItem('token', token);
+      }),
+      catchError(handleError(this.toast, 'getUser'))
+    );
+  }
+
+  updateUser(user: User): Observable<any> {
+    return this.http.put<ApiResponse>(`${apiUrl}/users/${user.id}`, user).pipe(
+      tap((res: ApiResponse) => {
+        console.log('res:', res);
+        const token = res.token;
+        localStorage.setItem('token', token);
+      }),
+      catchError(handleError(this.toast, 'updateUser'))
+    );
+  }
+
+  deleteUser(user: User): Observable<any> {
+    return this.http.delete<ApiResponse>(`${apiUrl}/users/${user.id}`).pipe(
+      tap((res: ApiResponse) => {
+        console.log('res:', res);
+        const token = res.token;
+        localStorage.setItem('token', token);
+      }),
+      catchError(handleError(this.toast, 'deleteUser'))
+    );
+  }
+
   signout(): void {
     localStorage.removeItem('token');
+    this.router.navigate(['/']);
   }
 
   isLoggedIn(): boolean {

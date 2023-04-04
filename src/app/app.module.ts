@@ -20,6 +20,7 @@ import { SignupComponent } from './components/signup/signup.component';
 import { MainComponent } from './pages/main/main.component';
 import { ConfirmationModalComponent } from './components/confirmation-modal/confirmation-modal.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { FooterComponent } from './components/footer/footer.component';
     MainComponent,
     ConfirmationModalComponent,
     FooterComponent,
+    HeaderComponent,
   ],
   imports: [
     AppRoutingModule,

@@ -1,0 +1,34 @@
+<header>
+  <nav>
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">About</a></li>
+    </ul>
+  </nav>
+
+  <div>
+    <!-- Edit Profile Button -->
+    <button class="edit-profile-btn" (click)="editProfile()">Edit Profile</button>
+
+    <!-- Logout Button -->
+    <button class="logout-btn" (click)="logout()">Logout</button>
+
+    <!-- Create Board Button -->
+    <button class="create-board-btn" (click)="createBoardBtn()">Create Board</button>
+
+    <!-- Delete User Button -->
+    <button class="delete-user-btn" (click)="confirmationModal.open()">Delete User</button>
+
+    <!-- Confirmation Modal -->
+    <app-confirmation-modal #confirmationModal
+      [message]="'Are you sure you want to delete your account? This action cannot be undone.'"
+      [confirmAction]="deleteUser"></app-confirmation-modal>
+
+    <!-- Localization Switcher -->
+    <select class=" localization-switcher">
+      <option value="en">English</option>
+      <option value="fr">French</option>
+      <option value="es">Spanish</option>
+    </select>
+  </div>
+</header>
