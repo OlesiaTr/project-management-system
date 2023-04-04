@@ -15,6 +15,10 @@ export class MainComponent implements OnInit {
   boards$: Observable<Board[]> = new Observable<Board[]>();
   filteredBoards: Board[] = [];
   searchTerm: string = '';
+  pageSize: number = 10;
+  pageNumber: number = 1;
+  totalPages: number = 1;
+  totalBoards: number = 0;
   @ViewChild('confirmationModal', { static: false })
   confirmationModal!: ConfirmationModalComponent;
 
@@ -24,10 +28,16 @@ export class MainComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.boards$ = this.boardService.getBoards();
+    this.getBoards();
+  }
+
+  getBoards(): void {
+    this.boards$ = this.boardService.getBoards(this.pageSize, this.pageNumber);
 
     this.boards$.subscribe((boards) => {
       this.filteredBoards = boards;
+      this.totalBoards = this.filteredBoards.length;
+      this.totalPages = Math.ceil(this.totalBoards / this.pageSize);
       this.filterBoards();
     });
   }
@@ -57,27 +67,27 @@ export class MainComponent implements OnInit {
   }
 
   filterBoards(): void {
-    this.boards$
-      .pipe(
-        debounceTime(500),
-        map((boards: Board[]) =>
-          boards.filter((board: Board) => {
-            const searchFields = [
-              board.id.toString(),
-              board.title,
-              board.description,
-              board.createdAt.toString(),
-              board.createdBy,
-            ];
-            return searchFields
-              .join(' ')
-              .toLowerCase()
-              .includes(this.searchTerm.toLowerCase());
-          })
-        )
-      )
-      .subscribe((filteredBoards) => {
-        this.filteredBoards = filteredBoards;
+    const start = (this.pageNumber - 1) * this.pageSize;
+    const end = start + this.pageSize;
+    this.filteredBoards = this.filteredBoards
+      .slice(start, end)
+      .filter((board: Board) => {
+        const searchFields = [
+          board.id.toString(),
+          board.title,
+          board.description,
+          board.createdAt.toString(),
+          board.createdBy,
+        ];
+        return searchFields
+          .join(' ')
+          .toLowerCase()
+          .includes(this.searchTerm.toLowerCase());
       });
+  }
+
+  onPageChange(event: any) {
+    this.pageNumber = event;
+    this.filterBoards();
   }
 }

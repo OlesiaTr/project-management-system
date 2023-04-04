@@ -29,11 +29,18 @@ export class BoardService {
     this.token = localStorage.getItem('token');
   }
 
-  getBoards(): Observable<Board[]> {
+  getBoards(
+    pageSize: number = 10,
+    pageNumber: number = 1
+  ): Observable<Board[]> {
     this.getToken();
+
+    const skip = (pageNumber - 1) * pageSize;
+    const take = pageSize;
     const headers = this.getHeaders();
+
     return this.http
-      .get<Board[]>(this.baseUrl, { headers })
+      .get<Board[]>(`${this.baseUrl}?skip=${skip}&take=${take}`, { headers })
       .pipe(catchError(handleError(this.toast, 'getBoards', [])));
   }
 

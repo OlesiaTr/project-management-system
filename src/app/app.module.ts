@@ -11,6 +11,7 @@ import {
   ToastNoAnimation,
   ToastNoAnimationModule,
 } from 'ngx-toastr';
+import { Network } from '@ionic-native/network/ngx';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { WelcomeComponent } from './pages/welcome/welcome.component';
@@ -42,6 +43,7 @@ import { ConfirmationModalComponent } from './components/confirmation-modal/conf
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
     JwtHelperService,
     ToastrService,
+    Network,
   ],
   bootstrap: [AppComponent],
 })

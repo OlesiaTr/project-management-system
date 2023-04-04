@@ -15,4 +15,15 @@
   </li>
 </ul>
 
+<div *ngIf="totalBoards === 0">No boards found.</div>
+
+<div *ngIf="totalBoards > 0">
+  <div class="pagination">
+    <button [disabled]="pageNumber === 1" (click)="onPageChange(pageNumber - 1)">Prev</button>
+    <span>{{pageNumber}}</span>
+    <button [disabled]="pageNumber === totalPages" (click)="onPageChange(pageNumber + 1)">Next</button>
+  </div>
+  <div>Total Boards: {{totalBoards}}</div>
+</div>
+
 <app-confirmation-modal #confirmationModal></app-confirmation-modal>
