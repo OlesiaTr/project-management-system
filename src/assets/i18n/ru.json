@@ -44,5 +44,26 @@
     "message": "Вы уверены, что хотите удалить эту доску?",
     "cancelBtn": "Отмена",
     "confirmBtn": "Подтвердить"
+  },
+  "signIn": {
+    "title": "Войти",
+    "signInBtn": "Войти"
+  },
+  "signUp": {
+    "title": "Регистрация",
+    "signUpBtn": "Зарегистрироваться"
+  },
+  "formHandle": {
+    "loginLabel": "Логин:",
+    "passwordLabel": "Пароль:",
+    "nameLabel": "Ваше имя"
+  },
+  "invalidInput": {
+    "nameRequired": "Имя является обязательным",
+    "invalidNameFormat": "Неверный формат имени",
+    "loginRequired": "Логин является обязательным",
+    "passwordRequired": "Пароль является обязательным",
+    "passwordMinLength": "Пароль должен содержать не менее {{requiredLength}} символов",
+    "passwordPattern": "Пароль должен содержать хотя бы одну букву и одну цифру."
   }
 }

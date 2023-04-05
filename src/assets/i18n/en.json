@@ -44,5 +44,26 @@
     "message": "Are you sure you want to delete this board?",
     "cancelBtn": "Cancel",
     "confirmBtn": "Confirm"
+  },
+  "signIn": {
+    "title": "Sign in",
+    "signInBtn": "Sign in"
+  },
+  "signUp": {
+    "title": "Sign Up",
+    "signUpBtn": "Sign Up"
+  },
+  "formHandle": {
+    "loginLabel": "Login:",
+    "passwordLabel": "Password:",
+    "nameLabel": "Your name"
+  },
+  "invalidInput": {
+    "nameRequired": "Name is required",
+    "invalidNameFormat": "Invalid name format",
+    "loginRequired": "Login is required",
+    "passwordRequired": "Password is required",
+    "passwordMinLength": "Password should be at least {{requiredLength}} characters long",
+    "passwordPattern": "Password must contain at least one letter and one number."
   }
 }

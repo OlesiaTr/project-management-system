@@ -44,5 +44,26 @@
     "message": "Ви впевнені, що хочете видалити цю дошку?",
     "cancelBtn": "Скасувати",
     "confirmBtn": "Підтвердити"
+  },
+  "signIn": {
+    "title": "Увійти",
+    "signInBtn": "Увійти"
+  },
+  "signUp": {
+    "title": "Реєстрація",
+    "signUpBtn": "Зареєструватися"
+  },
+  "formHandle": {
+    "loginLabel": "Логін:",
+    "passwordLabel": "Пароль:",
+    "nameLabel": "Ваше ім'я"
+  },
+  "invalidInput": {
+    "nameRequired": "Ім'я є обов'язковим",
+    "invalidNameFormat": "Невірний формат імені",
+    "loginRequired": "Логін є обов'язковим",
+    "passwordRequired": "Пароль є обов'язковим",
+    "passwordMinLength": "Пароль повинен бути не менше {{requiredLength}} символів",
+    "passwordPattern": "Пароль повинен містити хоча б одну літеру та одну цифру."
   }
 }

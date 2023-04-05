@@ -3,41 +3,42 @@
     <div class="col-md-6 offset-md-3">
       <div class="card">
         <div class="card-header">
-          <h3 class="text-center">Sign Up</h3>
+          <h3 class="text-center">{{ 'signUp.title' | translate }}</h3>
         </div>
         <div class="card-body">
           <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
             <div class="form-group">
-              <label>Your name</label>
+              <label>{{ 'formHandle.nameLabel' | translate }}</label>
               <input type="text" formControlName="name" class="form-control">
               <div *ngIf="isSubmitted && signupForm.controls['name'].errors" class="invalid-feedback">
-                <div *ngIf="signupForm.controls['name'].errors['required']">Name is required</div>
-                <div *ngIf="signupForm.controls['name'].errors['name']">Invalid name format</div>
+                <div *ngIf="signupForm.controls['name'].errors['required']">{{ 'invalidInput.nameRequired' | translate
+                  }}</div>
+                <div *ngIf="signupForm.controls['name'].errors['name']">{{ 'invalidInput.invalidNameFormat' | translate
+                  }}</div>
               </div>
             </div>
             <div class="form-group">
-              <label>Login</label>
+              <label>{{ 'formHandle.loginLabel' | translate }}</label>
               <input type="text" formControlName="login" class="form-control">
               <div *ngIf="isSubmitted && signupForm.controls['login'].errors" class="invalid-feedback">
-                Login is required
+                {{ 'invalidInput.loginRequired' | translate }}
               </div>
             </div>
             <div class="form-group">
-              <label>Password</label>
+              <label>{{ 'formHandle.passwordLabel' | translate }}</label>
               <input type="password" formControlName="password" class="form-control">
               <div *ngIf="isSubmitted && signupForm.controls['password'].errors" class="invalid-feedback">
-                <div *ngIf="signupForm.controls['password'].errors['required']">Password is required</div>
-                <div *ngIf="signupForm.controls['password'].errors['minlength']">Password should be at least
-                  {{signupForm.controls['password'].errors['minlength'].requiredLength}}
-                  characters long
+                <div *ngIf="signupForm.controls['password'].errors['required']">{{ 'invalidInput.passwordRequired' |
+                  translate }}</div>
+                <div *ngIf="signupForm.controls['password'].errors['minlength']">{{ 'invalidInput.passwordMinLength' |
+                  translate:{ requiredLength: signupForm.controls['password'].errors['minlength'].requiredLength } }}
                 </div>
-                <div *ngIf="signupForm.controls['password'].errors['pattern']">
-                  Password must contain at least one letter and one number.
-                </div>
+                <div *ngIf="signupForm.controls['password'].errors['pattern']">{{ 'invalidInput.passwordPattern' |
+                  translate }}</div>
               </div>
             </div>
             <div class="form-group">
-              <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+              <button type="submit" class="btn btn-primary btn-block">{{ 'signUp.signUpBtn' | translate }}</button>
             </div>
           </form>
         </div>

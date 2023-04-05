@@ -1,20 +1,20 @@
 <div class="container">
-  <h2>Sign in</h2>
+  <h2>{{ 'signIn.title' | translate }}</h2>
   <form [formGroup]="signInForm" (ngSubmit)="onSubmit()" novalidate>
     <div class="form-group">
-      <label for="login">Login:</label>
+      <label for="login">{{ 'formHandle.loginLabel' | translate }}</label>
       <input type="text" class="form-control" id="login" formControlName="login" required />
       <div *ngIf="
           signInForm.get('login')?.invalid &&
           (signInForm.get('login')?.dirty || signInForm.get('login')?.touched)
         " class="alert alert-danger">
         <div *ngIf="signInForm.get('login')?.errors?.['required']">
-          Login is required
+          {{ 'invalidInput.loginRequired' | translate }}
         </div>
       </div>
     </div>
     <div class="form-group">
-      <label for="password">Password:</label>
+      <label for="password">{{ 'formHandle.passwordLabel' | translate }}</label>
       <input type="password" class="form-control" id="password" formControlName="password" required />
       <div *ngIf="
           signInForm.get('password')?.invalid &&
@@ -22,18 +22,18 @@
             signInForm.get('password')?.touched)
         " class="alert alert-danger">
         <div *ngIf="signInForm.get('password')?.errors?.['required']">
-          Password is required
+          {{ 'invalidInput.passwordRequired' | translate }}
         </div>
         <div *ngIf="signInForm.get('password')?.errors?.['minlength']">
-          Password must be at least 6 characters long
+          {{ 'invalidInput.passwordMinLength' | translate }}
         </div>
         <div *ngIf="signInForm.get('password')?.errors?.['pattern']">
-          Password must contain at least one letter and one number
+          {{ 'invalidInput.passwordPattern' | translate }}
         </div>
       </div>
     </div>
     <button type="submit" class="btn btn-primary" [disabled]="signInForm.invalid">
-      Sign in
+      {{ 'signIn.signInBtn' | translate }}
     </button>
   </form>
 </div>
