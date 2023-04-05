@@ -1,29 +1,34 @@
-<h1>Boards</h1>
+<h1>{{ 'main.header' | translate }}</h1>
 
-<input type="text" [(ngModel)]="searchTerm" placeholder="Search">
-<button (click)="clearSearch()">Clear</button>
+<input type="text" [(ngModel)]="searchTerm" placeholder="{{ 'main.searchPlaceholder' | translate }}">
+<button (click)="clearSearch()">{{ 'main.clearBtn' | translate }}</button>
 
 <ul class="board-list">
   <li *ngFor="let board of filteredBoards" class="board-item">
     <a routerLink="/boards/{{board.id}}">
       <h2>{{board.title}}</h2>
       <p>{{board.description}}</p>
-      <p>Created on {{board.createdAt | date}}</p>
-      <p>Created by {{board.createdBy}}</p>
+      <p>{{ 'boardItem.createdOn' | translate:{ board: board } }}</p>
+      <p>{{ 'boardItem.createdBy' | translate:{ board: board } }}</p>
     </a>
-    <button (click)="deleteBoard(board.id)">Delete</button>
+    <button (click)="deleteBoard(board.id)">{{ 'boardItem.deleteBtn' | translate }}</button>
   </li>
 </ul>
 
-<div *ngIf="totalBoards === 0">No boards found.</div>
+<div *ngIf="totalBoards === 0">{{ 'main.noBoardsFound' | translate }}</div>
 
 <div *ngIf="totalBoards > 0">
   <div class="pagination">
-    <button [disabled]="pageNumber === 1" (click)="onPageChange(pageNumber - 1)">Prev</button>
+    <button [disabled]="pageNumber === 1" (click)="onPageChange(pageNumber - 1)">{{ 'pagination.prevBtn' | translate
+      }}</button>
     <span>{{pageNumber}}</span>
-    <button [disabled]="pageNumber === totalPages" (click)="onPageChange(pageNumber + 1)">Next</button>
+    <button [disabled]="pageNumber === totalPages" (click)="onPageChange(pageNumber + 1)">{{ 'pagination.nextBtn' |
+      translate }}</button>
   </div>
-  <div>Total Boards: {{totalBoards}}</div>
+  <div>{{ 'main.totalBoards' | translate:{ totalBoards: totalBoards } }}</div>
 </div>
 
-<app-confirmation-modal #confirmationModal></app-confirmation-modal>
+<app-confirmation-modal #confirmationModal title="{{ 'confirmationModal.title' | translate }}"
+  message="{{ 'confirmationModal.message' | translate }}"
+  cancelButtonText="{{ 'confirmationModal.cancelBtn' | translate }}"
+  confirmButtonText="{{ 'confirmationModal.confirmBtn' | translate }}"></app-confirmation-modal>

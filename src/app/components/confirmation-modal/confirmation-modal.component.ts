@@ -8,6 +8,8 @@ import { Component, Input } from '@angular/core';
 export class ConfirmationModalComponent {
   @Input() message!: string;
   @Input() confirmAction!: () => void;
+  @Input() confirmButtonText!: string;
+  @Input() cancelButtonText!: string;
   showModal = false;
 
   open() {

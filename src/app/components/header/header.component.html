@@ -1,34 +1,36 @@
 <header>
   <nav>
     <ul>
-      <li><a href="#">Home</a></li>
-      <li><a href="#">About</a></li>
+      <li><a href="#">{{ 'header.home' | translate }}</a></li>
+      <li><a href="#">{{ 'header.about' | translate }}</a></li>
     </ul>
   </nav>
 
   <div>
     <!-- Edit Profile Button -->
-    <button class="edit-profile-btn" (click)="editProfile()">Edit Profile</button>
+    <button *ngIf="isAuthenticated" class="edit-profile-btn" (click)="editProfile()">{{ 'header.editProfile' | translate
+      }}</button>
 
     <!-- Logout Button -->
-    <button class="logout-btn" (click)="logout()">Logout</button>
+    <button *ngIf="isAuthenticated" class="logout-btn" (click)="logout()">{{ 'header.logout' | translate }}</button>
 
     <!-- Create Board Button -->
-    <button class="create-board-btn" (click)="createBoardBtn()">Create Board</button>
+    <button *ngIf="isAuthenticated" class="create-board-btn" (click)="createBoardBtn()">{{ 'header.createBoard' |
+      translate }}</button>
 
     <!-- Delete User Button -->
-    <button class="delete-user-btn" (click)="confirmationModal.open()">Delete User</button>
+    <button *ngIf="isAuthenticated" class="delete-user-btn" (click)="confirmationModal.open()">{{ 'header.deleteUser' |
+      translate }}</button>
 
     <!-- Confirmation Modal -->
-    <app-confirmation-modal #confirmationModal
-      [message]="'Are you sure you want to delete your account? This action cannot be undone.'"
+    <app-confirmation-modal #confirmationModal [message]="('header.deleteConfirmation' | translate)"
       [confirmAction]="deleteUser"></app-confirmation-modal>
 
     <!-- Localization Switcher -->
-    <select class=" localization-switcher">
-      <option value="en">English</option>
-      <option value="fr">French</option>
-      <option value="es">Spanish</option>
+    <select class="localization-switcher" (change)="changeLanguage($event)">
+      <option value="en">{{ 'header.english' | translate }}</option>
+      <option value="ua">{{ 'header.ukrainian' | translate }}</option>
+      <option value="ru">{{ 'header.russian' | translate }}</option>
     </select>
   </div>
 </header>

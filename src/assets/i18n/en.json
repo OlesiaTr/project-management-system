@@ -1,0 +1,48 @@
+{
+  "header": {
+    "home": "Home",
+    "about": "About",
+    "editProfile": "Edit Profile",
+    "logout": "Logout",
+    "createBoard": "Create Board",
+    "deleteUser": "Delete User",
+    "deleteConfirmation": "Are you sure you want to delete your account? This action cannot be undone.",
+    "localization": "Localization",
+    "english": "English",
+    "ukrainian": "Ukrainian",
+    "russian": "Russian"
+  },
+  "footer": {
+    "github": "My Github"
+  },
+  "welcome": {
+    "greeting": "Welcome to the Project Management System!",
+    "developed": "It is developed by Olesia Trebina for RS School.",
+    "description": "This system is designed to help you manage your projects and stay on top of your deadlines",
+    "loginSingup": "Please login or sign up to continue",
+    "signIn": "Sign In",
+    "signUp": "Sign Up"
+  },
+  "main": {
+    "header": "Boards",
+    "searchPlaceholder": "Search",
+    "clearBtn": "Clear",
+    "noBoardsFound": "No boards found.",
+    "totalBoards": "Total Boards: {{totalBoards}}"
+  },
+  "pagination": {
+    "prevBtn": "Prev",
+    "nextBtn": "Next"
+  },
+  "boardItem": {
+    "createdOn": "Created on {{board.createdAt | date}}",
+    "createdBy": "Created by {{board.createdBy}}",
+    "deleteBtn": "Delete"
+  },
+  "confirmationModal": {
+    "title": "Confirmation",
+    "message": "Are you sure you want to delete this board?",
+    "cancelBtn": "Cancel",
+    "confirmBtn": "Confirm"
+  }
+}

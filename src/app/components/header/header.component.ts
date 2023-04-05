@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from 'src/app/services/auth.service';
-import { User } from 'src/interfaces/User';
+
+import { LanguagesService } from 'src/app/services/languages.service';
 
 @Component({
   selector: 'app-header',
@@ -9,7 +11,18 @@ import { User } from 'src/interfaces/User';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-  constructor(private router: Router, private authService: AuthService) {}
+  public isAuthenticated!: boolean;
+
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    public translate: TranslateService,
+    private languageService: LanguagesService
+  ) {
+    this.authService
+      .isLoggedIn()
+      .subscribe((auth) => (this.isAuthenticated = auth));
+  }
 
   editProfile() {
     this.router.navigate(['/edit-profile']);
@@ -29,8 +42,16 @@ export class HeaderComponent {
 
     this.authService.getUser(id).subscribe((user) => {
       this.authService.deleteUser(user).subscribe(() => {
+        this.authService.signout();
         this.router.navigate(['/']);
       });
     });
+  }
+
+  changeLanguage(event: any) {
+    const value = event?.target?.value;
+    if (!value) return;
+
+    this.languageService.setCurrentLang(value);
   }
 }

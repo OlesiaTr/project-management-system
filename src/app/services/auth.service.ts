@@ -5,12 +5,12 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
-import { ApiResponse } from 'src/interfaces/ApiResponse';
+import { ApiResponse } from 'src/assets/interfaces/ApiResponse';
 
 import { apiUrl } from '../constants/apiUrl';
 import { ToastService } from './toast.service';
 import { handleError } from '../utils/handleError';
-import { User } from 'src/interfaces/User';
+import { User } from 'src/assets/interfaces/User';
 
 @Injectable({
   providedIn: 'root',
@@ -99,11 +99,11 @@ export class AuthService {
     this.router.navigate(['/']);
   }
 
-  isLoggedIn(): boolean {
+  isLoggedIn(): Observable<boolean> {
     const token = localStorage.getItem('token');
-    if (token) return true;
+    if (token) return of(true);
 
-    return false;
+    return of(false);
   }
 
   getToken(): string | null {

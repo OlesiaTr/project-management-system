@@ -6,6 +6,7 @@ import { apiUrl } from '../constants/apiUrl';
 import { Board } from '../constants/boardClass';
 import { handleError } from '../utils/handleError';
 import { ToastService } from './toast.service';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +15,11 @@ export class BoardService {
   private baseUrl = `${apiUrl}/boards`;
   private token!: string | null;
 
-  constructor(private http: HttpClient, private toast: ToastService) {}
+  constructor(
+    private http: HttpClient,
+    private toast: ToastService,
+    private authService: AuthService
+  ) {}
 
   private getHeaders() {
     const headers = new HttpHeaders({
@@ -25,15 +30,11 @@ export class BoardService {
     return headers;
   }
 
-  getToken() {
-    this.token = localStorage.getItem('token');
-  }
-
   getBoards(
     pageSize: number = 10,
     pageNumber: number = 1
   ): Observable<Board[]> {
-    this.getToken();
+    this.token = this.authService.getToken();
 
     const skip = (pageNumber - 1) * pageSize;
     const take = pageSize;
@@ -45,7 +46,7 @@ export class BoardService {
   }
 
   createBoard(board: Board): Observable<Board> {
-    this.getToken();
+    this.token = this.authService.getToken();
     const headers = this.getHeaders();
     return this.http
       .post<Board>(this.baseUrl, board)
@@ -53,7 +54,7 @@ export class BoardService {
   }
 
   getBoardById(board: Board): Observable<Board> {
-    this.getToken();
+    this.token = this.authService.getToken();
     const headers = this.getHeaders();
     return this.http
       .get<Board>(`${this.baseUrl}/${board.id}`)
@@ -61,7 +62,7 @@ export class BoardService {
   }
 
   updateBoardById(board: Board): Observable<Board> {
-    this.getToken();
+    this.token = this.authService.getToken();
     const headers = this.getHeaders();
     return this.http
       .put<Board>(`${this.baseUrl}/${board.id}`, board)
@@ -69,7 +70,7 @@ export class BoardService {
   }
 
   deleteBoardById(board: Board): Observable<Board> {
-    this.getToken();
+    this.token = this.authService.getToken();
     const headers = this.getHeaders();
     return this.http
       .delete<Board>(`${this.baseUrl}/${board.id}`)
@@ -77,7 +78,7 @@ export class BoardService {
   }
 
   getBoardsByIds(boardIds: string[]): Observable<Board[]> {
-    this.getToken();
+    this.token = this.authService.getToken();
     const headers = this.getHeaders();
     const params = { ids: boardIds.join(',') };
     return this.http
@@ -86,7 +87,7 @@ export class BoardService {
   }
 
   getBoardsByUser(userId: string): Observable<Board[]> {
-    this.getToken();
+    this.token = this.authService.getToken();
     const headers = this.getHeaders();
     return this.http
       .get<Board[]>(`${apiUrl}/boardsSet/${userId}`)

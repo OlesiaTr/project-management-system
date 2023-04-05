@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-footer',
@@ -8,4 +9,6 @@ import { Component } from '@angular/core';
 export class FooterComponent {
   public currentYear: number = new Date().getFullYear();
   public githubLink: string = 'https://github.com/OlesiaTr';
+
+  constructor(public translate: TranslateService) {}
 }

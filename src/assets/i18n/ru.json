@@ -1,0 +1,48 @@
+{
+  "header": {
+    "home": "Главная",
+    "about": "О нас",
+    "editProfile": "Редактировать профиль",
+    "logout": "Выйти",
+    "createBoard": "Создать доску",
+    "deleteUser": "Удалить пользователя",
+    "deleteConfirmation": "Вы уверены, что хотите удалить свой аккаунт? Это действие нельзя отменить.",
+    "localization": "Локализация",
+    "english": "Английский",
+    "ukrainian": "Украинский",
+    "russian": "Русский"
+  },
+  "footer": {
+    "github": "Мой Github"
+  },
+  "welcome": {
+    "greeting": "Добро пожаловать в систему управления проектами!",
+    "developed": "Она разработана Олесей Требиной для RS School.",
+    "description": "Эта система предназначена для помощи в управлении проектами и контроля над сроками выполнения заданий",
+    "loginSingup": "Войти или зарегистрироваться",
+    "signIn": "Войти",
+    "signUp": "Зарегистрироваться"
+  },
+  "main": {
+    "header": "Доски",
+    "searchPlaceholder": "Поиск",
+    "clearBtn": "Очистить",
+    "noBoardsFound": "Доски не найдены.",
+    "totalBoards": "Всего досок: {{totalBoards}}"
+  },
+  "pagination": {
+    "prevBtn": "Назад",
+    "nextBtn": "Вперед"
+  },
+  "boardItem": {
+    "createdOn": "Создана {{board.createdAt | date}}",
+    "createdBy": "Создана пользователем {{board.createdBy}}",
+    "deleteBtn": "Удалить"
+  },
+  "confirmationModal": {
+    "title": "Подтверждение",
+    "message": "Вы уверены, что хотите удалить эту доску?",
+    "cancelBtn": "Отмена",
+    "confirmBtn": "Подтвердить"
+  }
+}
