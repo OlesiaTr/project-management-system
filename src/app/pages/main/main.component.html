@@ -8,10 +8,11 @@
     <a routerLink="/boards/{{board.id}}">
       <h2>{{board.title}}</h2>
       <p>{{board.description}}</p>
-      <p>{{ 'boardItem.createdOn' | translate:{ board: board } }}</p>
-      <p>{{ 'boardItem.createdBy' | translate:{ board: board } }}</p>
+      <p>{{ 'boardItem.createdOn' | translate:{ board: board ? board : {} } }}</p>
+      <p>{{ 'boardItem.createdBy' | translate:{ board: board ? board : {} } }}</p>
     </a>
     <button (click)="deleteBoard(board.id)">{{ 'boardItem.deleteBtn' | translate }}</button>
+
   </li>
 </ul>
 
@@ -28,7 +29,7 @@
   <div>{{ 'main.totalBoards' | translate:{ totalBoards: totalBoards } }}</div>
 </div>
 
-<app-confirmation-modal #confirmationModal title="{{ 'confirmationModal.title' | translate }}"
+<app-confirmation-modal #confirmationModal [title]="confirmationModalTitle"
   message="{{ 'confirmationModal.message' | translate }}"
   cancelButtonText="{{ 'confirmationModal.cancelBtn' | translate }}"
   confirmButtonText="{{ 'confirmationModal.confirmBtn' | translate }}"></app-confirmation-modal>

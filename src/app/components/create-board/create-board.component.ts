@@ -1,0 +1,98 @@
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { Observable, catchError, throwError, tap } from 'rxjs';
+import { Board } from 'src/app/constants/boardClass';
+import { AuthService } from 'src/app/services/auth.service';
+import { BoardService } from 'src/app/services/board.service';
+import { ToastService } from 'src/app/services/toast.service';
+import { handleError } from 'src/app/utils/handleError';
+import { User } from 'src/assets/interfaces/User';
+
+@Component({
+  selector: 'app-create-board',
+  templateUrl: './create-board.component.html',
+  styleUrls: ['./create-board.component.scss'],
+})
+export class CreateBoardComponent implements OnInit {
+  boardForm: FormGroup;
+
+  constructor(
+    private fb: FormBuilder,
+    private boardService: BoardService,
+    private router: Router,
+    public translate: TranslateService,
+    private authService: AuthService,
+    private toast: ToastService
+  ) {
+    this.boardForm = this.fb.group({
+      name: ['', Validators.required],
+      description: [''],
+      users: [''],
+    });
+  }
+
+  ngOnInit() {}
+
+  createBoard(): Observable<any> {
+    if (this.boardForm.invalid) {
+      return throwError(() => new Error('Board form is invalid.'));
+    }
+
+    const name = this.boardForm.controls['name'].value;
+    const description = this.boardForm.controls['description'].value;
+    const users = this.boardForm.controls['users'].value.split(',');
+    const userInfo = localStorage.getItem('userInfo');
+    const ownerId = userInfo ? JSON.parse(userInfo).userId : '';
+
+    const body: Board = {
+      title: name,
+      owner: ownerId || '',
+      users,
+    };
+
+    const board = {
+      title: name,
+      owner: ownerId || '',
+      users,
+      createdBy: ownerId,
+      createdAt: new Date().getTime(),
+      description,
+    };
+
+    const existingBoards = JSON.parse(localStorage.getItem('boards') || '[]');
+
+    existingBoards.push(board);
+
+    localStorage.setItem('boards', JSON.stringify(existingBoards));
+
+    return this.boardService.createBoard(body).pipe(
+      tap((res) => {
+        console.log('createBoard() success:', res);
+      }),
+      catchError((error) => {
+        console.log('createBoard() error:', error);
+        handleError(error.message);
+        return throwError(() => new Error(error.message));
+      })
+    );
+  }
+
+  onCreateBoard() {
+    console.log('Before createBoard()');
+    this.createBoard().subscribe(
+      (response) => {
+        console.log('createBoard() response:', response);
+        this.toast.showSuccess('Board created successfully!');
+        console.log('Before navigation');
+        this.router.navigate(['/main']);
+        console.log('After navigation');
+      },
+      (error) => {
+        console.log('createBoard() error:', error);
+        this.toast.showError('Error creating board:', error);
+      }
+    );
+  }
+}

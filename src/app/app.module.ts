@@ -23,6 +23,7 @@ import { MainComponent } from './pages/main/main.component';
 import { ConfirmationModalComponent } from './components/confirmation-modal/confirmation-modal.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
+import { CreateBoardComponent } from './components/create-board/create-board.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -38,6 +39,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ConfirmationModalComponent,
     FooterComponent,
     HeaderComponent,
+    CreateBoardComponent,
   ],
   imports: [
     AppRoutingModule,

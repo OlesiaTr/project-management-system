@@ -56,7 +56,11 @@
   "formHandle": {
     "loginLabel": "Login:",
     "passwordLabel": "Password:",
-    "nameLabel": "Your name"
+    "nameLabel": "Your name",
+    "boardNameLabel": "Board Name",
+    "boardDescriptionLabel": "Board Description",
+    "boardUsersLabel": "Add Users",
+    "createBoardBtn": "Create Board"
   },
   "invalidInput": {
     "nameRequired": "Name is required",

@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from 'src/app/services/auth.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { LanguagesService } from 'src/app/services/languages.service';
 
@@ -12,12 +13,14 @@ import { LanguagesService } from 'src/app/services/languages.service';
 })
 export class HeaderComponent {
   public isAuthenticated!: boolean;
+  @ViewChild('createBoardModal') createBoardModal!: TemplateRef<any>;
 
   constructor(
     private router: Router,
     private authService: AuthService,
     public translate: TranslateService,
-    private languageService: LanguagesService
+    private languageService: LanguagesService,
+    private modalService: NgbModal
   ) {
     this.authService
       .isLoggedIn()
@@ -33,11 +36,16 @@ export class HeaderComponent {
   }
 
   createBoardBtn() {
-    this.router.navigate(['/create-board']);
+    this.modalService.open(this.createBoardModal, { centered: true });
+  }
+
+  closeModal() {
+    this.modalService.dismissAll();
   }
 
   deleteUser() {
-    const id = localStorage.getItem('userId');
+    const userInfo = localStorage.getItem('userInfo');
+    const id = userInfo ? JSON.parse(userInfo).userId : '';
     if (!id) return;
 
     this.authService.getUser(id).subscribe((user) => {

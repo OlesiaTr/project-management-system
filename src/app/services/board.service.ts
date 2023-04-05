@@ -49,7 +49,7 @@ export class BoardService {
     this.token = this.authService.getToken();
     const headers = this.getHeaders();
     return this.http
-      .post<Board>(this.baseUrl, board)
+      .post<Board>(this.baseUrl, board, { headers })
       .pipe(catchError(handleError(this.toast, 'createBoard', [])));
   }
 
@@ -57,7 +57,7 @@ export class BoardService {
     this.token = this.authService.getToken();
     const headers = this.getHeaders();
     return this.http
-      .get<Board>(`${this.baseUrl}/${board.id}`)
+      .get<Board>(`${this.baseUrl}/${board.id}`, { headers })
       .pipe(catchError(handleError(this.toast, 'getBoardById', [])));
   }
 
@@ -65,7 +65,7 @@ export class BoardService {
     this.token = this.authService.getToken();
     const headers = this.getHeaders();
     return this.http
-      .put<Board>(`${this.baseUrl}/${board.id}`, board)
+      .put<Board>(`${this.baseUrl}/${board.id}`, board, { headers })
       .pipe(catchError(handleError(this.toast, 'updateBoardById', [])));
   }
 
@@ -73,7 +73,7 @@ export class BoardService {
     this.token = this.authService.getToken();
     const headers = this.getHeaders();
     return this.http
-      .delete<Board>(`${this.baseUrl}/${board.id}`)
+      .delete<Board>(`${this.baseUrl}/${board.id}`, { headers })
       .pipe(catchError(handleError(this.toast, 'deleteBoardById', [])));
   }
 
@@ -82,7 +82,7 @@ export class BoardService {
     const headers = this.getHeaders();
     const params = { ids: boardIds.join(',') };
     return this.http
-      .get<Board[]>(`${apiUrl}/boardsSet`, { params })
+      .get<Board[]>(`${apiUrl}/boardsSet`, { params, headers })
       .pipe(catchError(handleError(this.toast, 'getBoardsByIds', [])));
   }
 
@@ -90,7 +90,7 @@ export class BoardService {
     this.token = this.authService.getToken();
     const headers = this.getHeaders();
     return this.http
-      .get<Board[]>(`${apiUrl}/boardsSet/${userId}`)
+      .get<Board[]>(`${apiUrl}/boardsSet/${userId}`, { headers })
       .pipe(catchError(handleError(this.toast, 'getBoardsByUser', [])));
   }
 }

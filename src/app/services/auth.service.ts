@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { Observable, of } from 'rxjs';
+import { Observable, of, map } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
 import { ApiResponse } from 'src/assets/interfaces/ApiResponse';
@@ -55,18 +55,18 @@ export class AuthService {
         console.log('res:', res._id);
 
         const userId = res._id;
-        localStorage.setItem('userId', userId);
+        const userName = res.login;
+        localStorage.setItem('userInfo', JSON.stringify({ userId, userName }));
       }),
       catchError(handleError(this.toast, 'signup'))
     );
   }
 
-  getUser(id: string): Observable<any> {
+  getUser(id: string): Observable<User> {
     return this.http.get<ApiResponse>(`${apiUrl}/users/${id}`).pipe(
-      tap((res: ApiResponse) => {
-        console.log('res:', res);
-        const token = res.token;
-        localStorage.setItem('token', token);
+      map((res: ApiResponse) => res.user as User),
+      tap((user: User) => {
+        user.token = this.getToken() ?? '';
       }),
       catchError(handleError(this.toast, 'getUser'))
     );

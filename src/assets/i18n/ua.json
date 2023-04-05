@@ -56,7 +56,11 @@
   "formHandle": {
     "loginLabel": "Логін:",
     "passwordLabel": "Пароль:",
-    "nameLabel": "Ваше ім'я"
+    "nameLabel": "Ваше ім'я",
+    "boardNameLabel": "Назва дошки",
+    "boardDescriptionLabel": "Опис дошки",
+    "boardUsersLabel": "Користувачі дошки",
+    "createBoardBtn": "Створити дошку"
   },
   "invalidInput": {
     "nameRequired": "Ім'я є обов'язковим",

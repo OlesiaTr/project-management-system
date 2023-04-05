@@ -15,6 +15,7 @@ export class MainComponent implements OnInit {
   boards$: Observable<Board[]> = new Observable<Board[]>();
   filteredBoards: Board[] = [];
   searchTerm: string = '';
+  confirmationModalTitle: string = '';
   pageSize: number = 10;
   pageNumber: number = 1;
   totalPages: number = 1;
@@ -42,8 +43,12 @@ export class MainComponent implements OnInit {
     });
   }
 
-  deleteBoard(id: string) {
+  deleteBoard(id: string | undefined) {
+    if (!id) return;
+
     const board = { id } as Board;
+
+    this.confirmationModalTitle = 'Delete Board';
 
     this.confirmationModal.message =
       'Are you sure you want to delete this board?';
@@ -59,6 +64,8 @@ export class MainComponent implements OnInit {
         },
       });
     };
+
+    this.confirmationModal.open();
   }
 
   clearSearch() {
@@ -73,10 +80,10 @@ export class MainComponent implements OnInit {
       .slice(start, end)
       .filter((board: Board) => {
         const searchFields = [
-          board.id.toString(),
+          board.id ? board.id.toString() : '',
           board.title,
           board.description,
-          board.createdAt.toString(),
+          board.createdAt ? board.createdAt.toString() : '',
           board.createdBy,
         ];
         return searchFields

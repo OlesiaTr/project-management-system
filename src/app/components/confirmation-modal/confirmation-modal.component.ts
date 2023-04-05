@@ -10,6 +10,7 @@ export class ConfirmationModalComponent {
   @Input() confirmAction!: () => void;
   @Input() confirmButtonText!: string;
   @Input() cancelButtonText!: string;
+  @Input() title!: string;
   showModal = false;
 
   open() {

@@ -18,6 +18,18 @@
     <button *ngIf="isAuthenticated" class="create-board-btn" (click)="createBoardBtn()">{{ 'header.createBoard' |
       translate }}</button>
 
+    <ng-template #createBoardModal>
+      <div class="modal-header">
+        <h4 class="modal-title">{{ 'header.createBoard' | translate }}</h4>
+        <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <app-create-board></app-create-board>
+      </div>
+    </ng-template>
+
     <!-- Delete User Button -->
     <button *ngIf="isAuthenticated" class="delete-user-btn" (click)="confirmationModal.open()">{{ 'header.deleteUser' |
       translate }}</button>

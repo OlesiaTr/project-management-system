@@ -56,7 +56,11 @@
   "formHandle": {
     "loginLabel": "Логин:",
     "passwordLabel": "Пароль:",
-    "nameLabel": "Ваше имя"
+    "nameLabel": "Ваше имя",
+    "boardNameLabel": "Название доски",
+    "boardDescriptionLabel": "Описание доски",
+    "boardUsersLabel": "Пользователи доски",
+    "createBoardBtn": "Создать доску"
   },
   "invalidInput": {
     "nameRequired": "Имя является обязательным",
