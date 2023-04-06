@@ -1,5 +1,5 @@
 export class Board {
-  id?: string;
+  _id?: string;
   title?: string;
   description?: string;
   createdBy?: string;
@@ -8,7 +8,7 @@ export class Board {
   owner?: string;
 
   constructor(
-    id: string,
+    _id: string,
     title: string,
     description: string,
     createdBy: string,
@@ -16,7 +16,7 @@ export class Board {
     users: [],
     owner: string
   ) {
-    this.id = id;
+    this._id = _id;
     this.title = title;
     this.description = description;
     this.createdBy = createdBy;

@@ -35,8 +35,8 @@
     "nextBtn": "Next"
   },
   "boardItem": {
-    "createdOn": "Created on {{board.createdAt | date}}",
-    "createdBy": "Created by {{board.createdBy}}",
+    "createdOn": "Created on:",
+    "createdBy": "Created by:",
     "deleteBtn": "Delete"
   },
   "confirmationModal": {

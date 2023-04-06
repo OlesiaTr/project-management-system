@@ -1,6 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable, map } from 'rxjs';
+import { of } from 'rxjs/internal/observable/of';
 import { debounceTime } from 'rxjs/operators';
+
 import { ConfirmationModalComponent } from 'src/app/components/confirmation-modal/confirmation-modal.component';
 import { Board } from 'src/app/constants/boardClass';
 import { BoardService } from 'src/app/services/board.service';
@@ -20,12 +23,13 @@ export class MainComponent implements OnInit {
   pageNumber: number = 1;
   totalPages: number = 1;
   totalBoards: number = 0;
-  @ViewChild('confirmationModal', { static: false })
+  @ViewChild('confirmationModal')
   confirmationModal!: ConfirmationModalComponent;
 
   constructor(
     private boardService: BoardService,
-    private toast: ToastService
+    private toast: ToastService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -43,23 +47,23 @@ export class MainComponent implements OnInit {
     });
   }
 
-  deleteBoard(id: string | undefined) {
-    if (!id) return;
+  deleteBoard(_id: string | undefined) {
+    if (!_id) return;
 
-    const board = { id } as Board;
+    const board = { _id } as Board;
 
     this.confirmationModalTitle = 'Delete Board';
-
     this.confirmationModal.message =
       'Are you sure you want to delete this board?';
 
     this.confirmationModal.confirmAction = () => {
       this.boardService.deleteBoardById(board).subscribe({
         next: () => {
-          this.boards$ = this.boardService.getBoards();
+          console.log('Board deleted successfully');
+          this.getBoards();
         },
         error: (err) => {
-          console.log(err);
+          console.log('Error deleting board:', err);
           this.toast.showError(err.message);
         },
       });
@@ -80,7 +84,7 @@ export class MainComponent implements OnInit {
       .slice(start, end)
       .filter((board: Board) => {
         const searchFields = [
-          board.id ? board.id.toString() : '',
+          board._id ? board._id.toString() : '',
           board.title,
           board.description,
           board.createdAt ? board.createdAt.toString() : '',

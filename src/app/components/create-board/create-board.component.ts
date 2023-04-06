@@ -80,19 +80,14 @@ export class CreateBoardComponent implements OnInit {
   }
 
   onCreateBoard() {
-    console.log('Before createBoard()');
-    this.createBoard().subscribe(
-      (response) => {
-        console.log('createBoard() response:', response);
+    this.createBoard().subscribe({
+      next: (res) => {
         this.toast.showSuccess('Board created successfully!');
-        console.log('Before navigation');
         this.router.navigate(['/main']);
-        console.log('After navigation');
       },
-      (error) => {
-        console.log('createBoard() error:', error);
-        this.toast.showError('Error creating board:', error);
-      }
-    );
+      error: (err) => {
+        this.toast.showError('Error creating board:', err);
+      },
+    });
   }
 }

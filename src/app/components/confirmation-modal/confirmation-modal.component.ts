@@ -11,17 +11,20 @@ export class ConfirmationModalComponent {
   @Input() confirmButtonText!: string;
   @Input() cancelButtonText!: string;
   @Input() title!: string;
-  showModal = false;
+  @Input() showModal: boolean = false;
 
   open() {
+    console.log('ConfirmationModalComponent: open()');
     this.showModal = true;
   }
 
   close() {
+    console.log('ConfirmationModalComponent: close()');
     this.showModal = false;
   }
 
   confirm() {
+    console.log('ConfirmationModalComponent: confirm()');
     this.confirmAction();
     this.close();
   }

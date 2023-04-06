@@ -57,7 +57,7 @@ export class BoardService {
     this.token = this.authService.getToken();
     const headers = this.getHeaders();
     return this.http
-      .get<Board>(`${this.baseUrl}/${board.id}`, { headers })
+      .get<Board>(`${this.baseUrl}/${board._id}`, { headers })
       .pipe(catchError(handleError(this.toast, 'getBoardById', [])));
   }
 
@@ -65,15 +65,18 @@ export class BoardService {
     this.token = this.authService.getToken();
     const headers = this.getHeaders();
     return this.http
-      .put<Board>(`${this.baseUrl}/${board.id}`, board, { headers })
+      .put<Board>(`${this.baseUrl}/${board._id}`, board, { headers })
       .pipe(catchError(handleError(this.toast, 'updateBoardById', [])));
   }
 
   deleteBoardById(board: Board): Observable<Board> {
+    console.log('board:', board);
+    console.log('deleteBoardById()');
     this.token = this.authService.getToken();
     const headers = this.getHeaders();
+    console.log(`${this.baseUrl}/${board._id}`);
     return this.http
-      .delete<Board>(`${this.baseUrl}/${board.id}`, { headers })
+      .delete<Board>(`${this.baseUrl}/${board._id}`, { headers })
       .pipe(catchError(handleError(this.toast, 'deleteBoardById', [])));
   }
 

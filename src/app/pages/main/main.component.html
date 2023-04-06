@@ -5,13 +5,13 @@
 
 <ul class="board-list">
   <li *ngFor="let board of filteredBoards" class="board-item">
-    <a routerLink="/boards/{{board.id}}">
+    <a routerLink="/boards/{{board._id}}">
       <h2>{{board.title}}</h2>
       <p>{{board.description}}</p>
-      <p>{{ 'boardItem.createdOn' | translate:{ board: board ? board : {} } }}</p>
-      <p>{{ 'boardItem.createdBy' | translate:{ board: board ? board : {} } }}</p>
+      <p>{{ 'boardItem.createdOn' | translate }} {{ board.createdAt ? (board.createdAt | date) : '-' }}</p>
+      <p>{{ 'boardItem.createdBy' | translate }} {{ board.createdBy ? board.createdBy : '-' }}</p>
     </a>
-    <button (click)="deleteBoard(board.id)">{{ 'boardItem.deleteBtn' | translate }}</button>
+    <button (click)="deleteBoard(board?._id)">{{ 'boardItem.deleteBtn' | translate }}</button>
 
   </li>
 </ul>

@@ -35,8 +35,8 @@
     "nextBtn": "Вперед"
   },
   "boardItem": {
-    "createdOn": "Создана {{board.createdAt | date}}",
-    "createdBy": "Создана пользователем {{board.createdBy}}",
+    "createdOn": "Создана:",
+    "createdBy": "Создана пользователем:",
     "deleteBtn": "Удалить"
   },
   "confirmationModal": {
