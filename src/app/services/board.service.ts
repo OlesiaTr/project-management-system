@@ -55,11 +55,12 @@ export class BoardService {
       .pipe(catchError(handleError(this.toast, 'createBoard', [])));
   }
 
-  getBoardById(board: Board): Observable<Board> {
+  getBoardById(board: Board | string): Observable<Board> {
     this.token = this.authService.getToken();
     const headers = this.getHeaders();
+    const boardId = typeof board === 'string' ? board : board._id;
     return this.http
-      .get<Board>(`${this.baseUrl}/${board._id}`, { headers })
+      .get<Board>(`${this.baseUrl}/${boardId}`, { headers })
       .pipe(catchError(handleError(this.toast, 'getBoardById', [])));
   }
 
@@ -71,21 +72,23 @@ export class BoardService {
       .pipe(catchError(handleError(this.toast, 'updateBoardById', [])));
   }
 
-  deleteBoardById(board: Board): Observable<Board> {
-    console.log('board:', board);
+  deleteBoardById(board: Board | string): Observable<Board> {
     console.log('deleteBoardById()');
     this.token = this.authService.getToken();
     const headers = this.getHeaders();
-    console.log(`${this.baseUrl}/${board._id}`);
+    const boardId = typeof board === 'string' ? board : board._id;
+    console.log(`${this.baseUrl}/${boardId}`);
     return this.http
-      .delete<Board>(`${this.baseUrl}/${board._id}`, { headers })
+      .delete<Board>(`${this.baseUrl}/${boardId}`, { headers })
       .pipe(
         tap(() => {
           // remove the board from localStorage
           const boards = JSON.parse(localStorage.getItem('boards') || '[]');
-          const updatedBoards = boards.filter(
-            (b: Board) => b._id !== board._id
-          );
+
+          console.log('boards', boards);
+          const updatedBoards = boards.filter((b: Board) => b._id !== boardId);
+
+          console.log('updatedBoards', updatedBoards);
           localStorage.setItem('boards', JSON.stringify(updatedBoards));
         }),
         catchError(handleError(this.toast, 'deleteBoardById', []))

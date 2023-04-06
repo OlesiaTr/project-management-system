@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { BoardService } from 'src/app/services/board.service';
 
 @Component({
   selector: 'app-confirmation-modal',
@@ -12,6 +13,8 @@ export class ConfirmationModalComponent {
   @Input() cancelButtonText!: string;
   @Input() title!: string;
   @Input() showModal: boolean = false;
+
+  constructor(private boardService: BoardService) {}
 
   open() {
     console.log('ConfirmationModalComponent: open()');
@@ -27,5 +30,16 @@ export class ConfirmationModalComponent {
     console.log('ConfirmationModalComponent: confirm()');
     this.confirmAction();
     this.close();
+  }
+
+  deleteBoard() {
+    const boardId = localStorage.getItem('boardId');
+    if (!boardId) return;
+
+    console.log('boardId:', boardId);
+    this.boardService.deleteBoardById(boardId).subscribe((res) => {
+      console.log(res);
+      this.confirm();
+    });
   }
 }

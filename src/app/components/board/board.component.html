@@ -1,0 +1,8 @@
+<h1>{{ board?.title }}</h1>
+<p>{{ board?.description }}</p>
+
+<button class="button is-danger" (click)="openDeleteModal()">Delete Board</button>
+
+<app-confirmation-modal [message]="'Are you sure you want to delete this board?'" [title]="'Delete Board'"
+  [confirmButtonText]="'Delete'" [cancelButtonText]="'Cancel'" [showModal]="showModal" (close)="closeDeleteModal()"
+  [confirmAction]="confirmAction"></app-confirmation-modal>
