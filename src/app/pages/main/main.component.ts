@@ -34,20 +34,30 @@ export class MainComponent implements OnInit {
 
   ngOnInit(): void {
     this.getBoards();
+    console.log('filteredBoards', this.filteredBoards);
+    console.log('totalBoards', this.totalBoards);
   }
 
   getBoards(): void {
-    this.boards$ = this.boardService.getBoards(this.pageSize, this.pageNumber);
+    this.boardService
+      .getBoards(this.pageSize, this.pageNumber)
+      .subscribe((boards) => {
+        this.totalPages = Math.ceil(this.totalBoards / this.pageSize);
+        const start = (this.pageNumber - 1) * this.pageSize;
+        const end = start + this.pageSize;
+        this.filteredBoards = boards.slice(start, end);
+        this.filterBoards();
+        this.totalBoards = this.filteredBoards.length;
 
-    this.boards$.subscribe((boards) => {
-      this.filteredBoards = boards;
-      this.totalBoards = this.filteredBoards.length;
-      this.totalPages = Math.ceil(this.totalBoards / this.pageSize);
-      this.filterBoards();
-    });
+        console.log('boards', boards);
+        console.log('filteredBoards', this.filteredBoards);
+        console.log('totalBoards', this.totalBoards);
+      });
   }
 
   deleteBoard(_id: string | undefined) {
+    console.log('deleteBoard()');
+    console.log('_id:', _id);
     if (!_id) return;
 
     const board = { _id } as Board;
@@ -80,7 +90,12 @@ export class MainComponent implements OnInit {
   filterBoards(): void {
     const start = (this.pageNumber - 1) * this.pageSize;
     const end = start + this.pageSize;
-    this.filteredBoards = this.filteredBoards
+    const allBoards = localStorage.getItem('boards');
+    if (allBoards === null) return;
+
+    const parsedBoards = JSON.parse(allBoards);
+
+    this.filteredBoards = parsedBoards
       .slice(start, end)
       .filter((board: Board) => {
         const searchFields = [
@@ -97,8 +112,8 @@ export class MainComponent implements OnInit {
       });
   }
 
-  onPageChange(event: any) {
-    this.pageNumber = event;
+  onPageChange(event: { pageNumber: number }) {
+    this.pageNumber = event.pageNumber;
     this.filterBoards();
   }
 }

@@ -42,15 +42,17 @@ export class CreateBoardComponent implements OnInit {
 
     const name = this.boardForm.controls['name'].value;
     const description = this.boardForm.controls['description'].value;
-    const users = this.boardForm.controls['users'].value.split(',');
+    const users = this.boardForm.controls['users'].value.split(',') ?? [''];
     const userInfo = localStorage.getItem('userInfo');
-    const ownerId = userInfo ? JSON.parse(userInfo).userId : '';
+    const ownerId = userInfo ? JSON.parse(userInfo).userName : '';
 
     const body: Board = {
       title: name,
       owner: ownerId || '',
       users,
     };
+
+    console.log('body:', body);
 
     const board = {
       title: name,
@@ -61,14 +63,24 @@ export class CreateBoardComponent implements OnInit {
       description,
     };
 
-    const existingBoards = JSON.parse(localStorage.getItem('boards') || '[]');
-
-    existingBoards.push(board);
-
-    localStorage.setItem('boards', JSON.stringify(existingBoards));
-
     return this.boardService.createBoard(body).pipe(
       tap((res) => {
+        const existingBoards = JSON.parse(
+          localStorage.getItem('boards') || '[]'
+        );
+
+        console.log('res:', res);
+
+        const newBoard = {
+          _id: res._id,
+          ...board,
+        };
+
+        console.log('newBoard:', newBoard);
+
+        const updatedBoards = [...existingBoards, newBoard];
+
+        localStorage.setItem('boards', JSON.stringify(updatedBoards));
         console.log('createBoard() success:', res);
       }),
       catchError((error) => {

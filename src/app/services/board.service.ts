@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, catchError } from 'rxjs';
+import { Observable, catchError, tap } from 'rxjs';
 
 import { apiUrl } from '../constants/apiUrl';
 import { Board } from '../constants/boardClass';
@@ -14,6 +14,7 @@ import { AuthService } from './auth.service';
 export class BoardService {
   private baseUrl = `${apiUrl}/boards`;
   private token!: string | null;
+  public totalCount: number = 0;
 
   constructor(
     private http: HttpClient,
@@ -46,6 +47,7 @@ export class BoardService {
   }
 
   createBoard(board: Board): Observable<Board> {
+    console.log('board:', board);
     this.token = this.authService.getToken();
     const headers = this.getHeaders();
     return this.http
@@ -77,7 +79,17 @@ export class BoardService {
     console.log(`${this.baseUrl}/${board._id}`);
     return this.http
       .delete<Board>(`${this.baseUrl}/${board._id}`, { headers })
-      .pipe(catchError(handleError(this.toast, 'deleteBoardById', [])));
+      .pipe(
+        tap(() => {
+          // remove the board from localStorage
+          const boards = JSON.parse(localStorage.getItem('boards') || '[]');
+          const updatedBoards = boards.filter(
+            (b: Board) => b._id !== board._id
+          );
+          localStorage.setItem('boards', JSON.stringify(updatedBoards));
+        }),
+        catchError(handleError(this.toast, 'deleteBoardById', []))
+      );
   }
 
   getBoardsByIds(boardIds: string[]): Observable<Board[]> {

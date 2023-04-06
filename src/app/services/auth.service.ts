@@ -30,6 +30,8 @@ export class AuthService {
       tap((res: ApiResponse) => {
         console.log('res:', res);
         if (res.token) {
+          const userName = login;
+          localStorage.setItem('userInfo', JSON.stringify({ userName }));
           const token = `Bearer ${res.token}`;
           localStorage.setItem('token', token);
         }
