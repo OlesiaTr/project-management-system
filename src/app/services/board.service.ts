@@ -13,7 +13,7 @@ import { AuthService } from './auth.service';
 })
 export class BoardService {
   private baseUrl = `${apiUrl}/boards`;
-  private token!: string | null;
+  private token!: string;
   public totalCount: number = 0;
 
   constructor(
@@ -22,10 +22,10 @@ export class BoardService {
     private authService: AuthService
   ) {}
 
-  private getHeaders() {
+  getHeaders(token: string) {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${this.token}`,
+      Authorization: `Bearer ${token}`,
     });
 
     return headers;
@@ -35,11 +35,11 @@ export class BoardService {
     pageSize: number = 10,
     pageNumber: number = 1
   ): Observable<Board[]> {
-    this.token = this.authService.getToken();
+    this.token = this.authService.getToken() ?? '';
 
     const skip = (pageNumber - 1) * pageSize;
     const take = pageSize;
-    const headers = this.getHeaders();
+    const headers = this.getHeaders(this.token);
 
     return this.http
       .get<Board[]>(`${this.baseUrl}?skip=${skip}&take=${take}`, { headers })
@@ -48,16 +48,16 @@ export class BoardService {
 
   createBoard(board: Board): Observable<Board> {
     console.log('board:', board);
-    this.token = this.authService.getToken();
-    const headers = this.getHeaders();
+    this.token = this.authService.getToken() ?? '';
+    const headers = this.getHeaders(this.token);
     return this.http
       .post<Board>(this.baseUrl, board, { headers })
       .pipe(catchError(handleError(this.toast, 'createBoard', [])));
   }
 
   getBoardById(board: Board | string): Observable<Board> {
-    this.token = this.authService.getToken();
-    const headers = this.getHeaders();
+    this.token = this.authService.getToken() ?? '';
+    const headers = this.getHeaders(this.token);
     const boardId = typeof board === 'string' ? board : board._id;
     return this.http
       .get<Board>(`${this.baseUrl}/${boardId}`, { headers })
@@ -65,8 +65,8 @@ export class BoardService {
   }
 
   updateBoardById(board: Board): Observable<Board> {
-    this.token = this.authService.getToken();
-    const headers = this.getHeaders();
+    this.token = this.authService.getToken() ?? '';
+    const headers = this.getHeaders(this.token);
     return this.http
       .put<Board>(`${this.baseUrl}/${board._id}`, board, { headers })
       .pipe(catchError(handleError(this.toast, 'updateBoardById', [])));
@@ -74,8 +74,8 @@ export class BoardService {
 
   deleteBoardById(board: Board | string): Observable<Board> {
     console.log('deleteBoardById()');
-    this.token = this.authService.getToken();
-    const headers = this.getHeaders();
+    this.token = this.authService.getToken() ?? '';
+    const headers = this.getHeaders(this.token);
     const boardId = typeof board === 'string' ? board : board._id;
     console.log(`${this.baseUrl}/${boardId}`);
     return this.http
@@ -96,8 +96,8 @@ export class BoardService {
   }
 
   getBoardsByIds(boardIds: string[]): Observable<Board[]> {
-    this.token = this.authService.getToken();
-    const headers = this.getHeaders();
+    this.token = this.authService.getToken() ?? '';
+    const headers = this.getHeaders(this.token);
     const params = { ids: boardIds.join(',') };
     return this.http
       .get<Board[]>(`${apiUrl}/boardsSet`, { params, headers })
@@ -105,8 +105,8 @@ export class BoardService {
   }
 
   getBoardsByUser(userId: string): Observable<Board[]> {
-    this.token = this.authService.getToken();
-    const headers = this.getHeaders();
+    this.token = this.authService.getToken() ?? '';
+    const headers = this.getHeaders(this.token);
     return this.http
       .get<Board[]>(`${apiUrl}/boardsSet/${userId}`, { headers })
       .pipe(catchError(handleError(this.toast, 'getBoardsByUser', [])));

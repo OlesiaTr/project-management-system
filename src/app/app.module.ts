@@ -26,6 +26,8 @@ import { HeaderComponent } from './components/header/header.component';
 import { CreateBoardComponent } from './components/create-board/create-board.component';
 import { ConfirmationModalComponent } from './components/confirmation-modal/confirmation-modal.component';
 import { BoardComponent } from './components/board/board.component';
+import { ColumnComponent } from './components/column/column.component';
+import { TaskComponent } from './components/task/task.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -43,6 +45,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     HeaderComponent,
     CreateBoardComponent,
     BoardComponent,
+    ColumnComponent,
+    TaskComponent,
   ],
   imports: [
     AppRoutingModule,
