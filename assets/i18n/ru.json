@@ -1,0 +1,73 @@
+{
+  "header": {
+    "home": "Главная",
+    "about": "О нас",
+    "editProfile": "Редактировать профиль",
+    "logout": "Выйти",
+    "createBoard": "Создать доску",
+    "deleteUser": "Удалить пользователя",
+    "deleteConfirmation": "Вы уверены, что хотите удалить свой аккаунт? Это действие нельзя отменить.",
+    "localization": "Локализация",
+    "english": "Английский",
+    "ukrainian": "Украинский",
+    "russian": "Русский"
+  },
+  "footer": {
+    "github": "Мой Github"
+  },
+  "welcome": {
+    "greeting": "Добро пожаловать в систему управления проектами!",
+    "developed": "Она разработана Олесей Требиной для RS School.",
+    "description": "Эта система предназначена для помощи в управлении проектами и контроля над сроками выполнения заданий",
+    "loginSingup": "Войти или зарегистрироваться",
+    "signIn": "Войти",
+    "signUp": "Зарегистрироваться"
+  },
+  "main": {
+    "header": "Доски",
+    "searchPlaceholder": "Поиск",
+    "clearBtn": "Очистить",
+    "noBoardsFound": "Доски не найдены.",
+    "totalBoards": "Всего досок: {{totalBoards}}"
+  },
+  "pagination": {
+    "prevBtn": "Назад",
+    "nextBtn": "Вперед"
+  },
+  "boardItem": {
+    "createdOn": "Создана:",
+    "createdBy": "Создана пользователем:",
+    "deleteBtn": "Удалить"
+  },
+  "confirmationModal": {
+    "title": "Подтверждение",
+    "message": "Вы уверены, что хотите удалить эту доску?",
+    "cancelBtn": "Отмена",
+    "confirmBtn": "Подтвердить"
+  },
+  "signIn": {
+    "title": "Войти",
+    "signInBtn": "Войти"
+  },
+  "signUp": {
+    "title": "Регистрация",
+    "signUpBtn": "Зарегистрироваться"
+  },
+  "formHandle": {
+    "loginLabel": "Логин:",
+    "passwordLabel": "Пароль:",
+    "nameLabel": "Ваше имя",
+    "boardNameLabel": "Название доски",
+    "boardDescriptionLabel": "Описание доски",
+    "boardUsersLabel": "Пользователи доски",
+    "createBoardBtn": "Создать доску"
+  },
+  "invalidInput": {
+    "nameRequired": "Имя является обязательным",
+    "invalidNameFormat": "Неверный формат имени",
+    "loginRequired": "Логин является обязательным",
+    "passwordRequired": "Пароль является обязательным",
+    "passwordMinLength": "Пароль должен содержать не менее {{requiredLength}} символов",
+    "passwordPattern": "Пароль должен содержать хотя бы одну букву и одну цифру."
+  }
+}
