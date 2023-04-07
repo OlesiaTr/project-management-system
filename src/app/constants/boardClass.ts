@@ -1,3 +1,5 @@
+import { Column } from 'src/assets/interfaces/Column';
+
 export class Board {
   _id?: string;
   title?: string;
@@ -6,6 +8,7 @@ export class Board {
   createdAt?: Date;
   users?: [];
   owner?: string;
+  columns?: Column[];
 
   constructor(
     _id: string,
@@ -14,7 +17,8 @@ export class Board {
     createdBy: string,
     createdAt: Date,
     users: [],
-    owner: string
+    owner: string,
+    columns: Column[]
   ) {
     this._id = _id;
     this.title = title;
@@ -23,5 +27,6 @@ export class Board {
     this.createdAt = createdAt;
     this.users = users;
     this.owner = owner;
+    this.columns = columns;
   }
 }

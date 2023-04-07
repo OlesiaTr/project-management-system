@@ -1,8 +1,47 @@
-<h1>{{ board?.title }}</h1>
-<p>{{ board?.description }}</p>
+<h1 class="display-4">{{ board.title }}</h1>
+<p class="lead">{{ board.description }}</p>
 
-<button class="button is-danger" (click)="openDeleteModal()">Delete Board</button>
+<button class="btn btn-danger delete-board-btn" (click)="showModal = true">Delete Board</button>
+
+<!-- <button class="btn btn-primary" (click)="openCreateColumnModal()" *ngIf="board?.columns?.length > 0">Add Column</button> -->
+
+<!-- <div class="columns-container" *ngIf="board?.columns?.length > 0">
+  <div class="row">
+    <div class="col" *ngFor="let column of board?.columns">
+      <div class="card column-card">
+        <div class="card-header">{{ column.title }}</div>
+        <div class="card-body">
+          <app-task *ngFor="let task of column.tasks" [task]="task"></app-task>
+          <div class="add-task-container">
+            <button class="btn btn-primary add-task-btn" (click)="openCreateTaskModal(column)">Add Task</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
 
 <app-confirmation-modal [message]="'Are you sure you want to delete this board?'" [title]="'Delete Board'"
   [confirmButtonText]="'Delete'" [cancelButtonText]="'Cancel'" [showModal]="showModal" (close)="closeDeleteModal()"
-  [confirmAction]="confirmAction"></app-confirmation-modal>
+  [confirmAction]="onDeleteBoard" class="modal-container"></app-confirmation-modal>
+
+<app-modal [title]="'Add Column'" [showModal]="showCreateColumnModal" (close)="closeCreateColumnModal()">
+  <form (ngSubmit)="onCreateColumnSubmit($event)">
+    <div class="form-group">
+      <label for="newColumnName">Column Name:</label>
+      <input type="text" class="form-control" id="newColumnName" name="newColumnName" [(ngModel)]="newColumnName"
+        required>
+    </div>
+    <button type="submit" class="btn btn-primary">Add Column</button>
+  </form>
+</app-modal>
+
+<!-- <app-modal [title]="'Add Task'" [showModal]="showCreateTaskModal" (close)="closeCreateTaskModal()">
+  <form (ngSubmit)="onCreateTaskSubmit($event)">
+    <div class="form-group">
+      <label for="newTaskName">Task Name:</label>
+      <input type="text" class="form-control" id="newTaskName" name="newTaskName" [(ngModel)]="newTaskName" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Add Task</button>
+  </form>
+</app-modal> -->

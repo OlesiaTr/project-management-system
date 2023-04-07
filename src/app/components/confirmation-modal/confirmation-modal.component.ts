@@ -31,15 +31,4 @@ export class ConfirmationModalComponent {
     this.confirmAction();
     this.close();
   }
-
-  deleteBoard() {
-    const boardId = localStorage.getItem('boardId');
-    if (!boardId) return;
-
-    console.log('boardId:', boardId);
-    this.boardService.deleteBoardById(boardId).subscribe((res) => {
-      console.log(res);
-      this.confirm();
-    });
-  }
 }

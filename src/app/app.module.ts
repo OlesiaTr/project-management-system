@@ -28,6 +28,8 @@ import { ConfirmationModalComponent } from './components/confirmation-modal/conf
 import { BoardComponent } from './components/board/board.component';
 import { ColumnComponent } from './components/column/column.component';
 import { TaskComponent } from './components/task/task.component';
+import { ModalComponent } from './components/modal/modal.component';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -45,8 +47,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     HeaderComponent,
     CreateBoardComponent,
     BoardComponent,
+    ModalComponent,
     ColumnComponent,
     TaskComponent,
+    ModalComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -67,6 +71,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   ],
   providers: [
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
     JwtHelperService,
     ToastrService,
     Network,
