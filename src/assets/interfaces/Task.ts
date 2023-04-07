@@ -1,6 +1,10 @@
 export interface Task {
-  id: number;
+  _id: string;
   title: string;
   description: string;
-  columnId: number;
+  columnId: string;
+  order: number;
+  boardId: string;
+  userId: string;
+  users: [string];
 }
