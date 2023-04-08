@@ -1,15 +1,15 @@
-<div class="container">
+<section class="container">
   <div class="row">
     <div class="col-md-6 offset-md-3">
-      <div class="card">
-        <div class="card-header">
+      <article class="card">
+        <header class="card-header">
           <h3 class="text-center">{{ 'signUp.title' | translate }}</h3>
-        </div>
-        <div class="card-body">
+        </header>
+        <section class="card-body">
           <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
             <div class="form-group">
-              <label>{{ 'formHandle.nameLabel' | translate }}</label>
-              <input type="text" formControlName="name" class="form-control">
+              <label for="name">{{ 'formHandle.nameLabel' | translate }}</label>
+              <input type="text" id="name" formControlName="name" class="form-control">
               <div *ngIf="isSubmitted && signupForm.controls['name'].errors" class="invalid-feedback">
                 <div *ngIf="signupForm.controls['name'].errors['required']">{{ 'invalidInput.nameRequired' | translate
                   }}</div>
@@ -18,15 +18,15 @@
               </div>
             </div>
             <div class="form-group">
-              <label>{{ 'formHandle.loginLabel' | translate }}</label>
-              <input type="text" formControlName="login" class="form-control">
+              <label for="login">{{ 'formHandle.loginLabel' | translate }}</label>
+              <input type="text" id="login" formControlName="login" class="form-control">
               <div *ngIf="isSubmitted && signupForm.controls['login'].errors" class="invalid-feedback">
                 {{ 'invalidInput.loginRequired' | translate }}
               </div>
             </div>
             <div class="form-group">
-              <label>{{ 'formHandle.passwordLabel' | translate }}</label>
-              <input type="password" formControlName="password" class="form-control">
+              <label for="password">{{ 'formHandle.passwordLabel' | translate }}</label>
+              <input type="password" id="password" formControlName="password" class="form-control">
               <div *ngIf="isSubmitted && signupForm.controls['password'].errors" class="invalid-feedback">
                 <div *ngIf="signupForm.controls['password'].errors['required']">{{ 'invalidInput.passwordRequired' |
                   translate }}</div>
@@ -41,8 +41,8 @@
               <button type="submit" class="btn btn-primary btn-block">{{ 'signUp.signUpBtn' | translate }}</button>
             </div>
           </form>
-        </div>
-      </div>
+        </section>
+      </article>
     </div>
   </div>
-</div>
+</section>

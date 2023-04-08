@@ -1,36 +1,39 @@
-<h1>{{ 'main.header' | translate }}</h1>
+<section class="container">
+  <h1>{{ 'main.header' | translate }}</h1>
 
-<input type="text" [(ngModel)]="searchTerm" placeholder="{{ 'main.searchPlaceholder' | translate }}">
-<button (click)="clearSearch()">{{ 'main.clearBtn' | translate }}</button>
+  <input type="text" [(ngModel)]="searchTerm" placeholder="{{ 'main.searchPlaceholder' | translate }}">
+  <button (click)="clearSearch()">{{ 'main.clearBtn' | translate }}</button>
 
-<ul class="board-list">
-  <li *ngFor="let board of filteredBoards" class="board-item">
-    <a [routerLink]="['/boards', board._id]">
-      <h2>{{board.title}}</h2>
-      <p>{{board.description}}</p>
-      <p>{{ 'boardItem.createdOn' | translate }} {{ board.createdAt ? (board.createdAt | date) : '-' }}</p>
-      <p>{{ 'boardItem.createdBy' | translate }} {{ board.createdBy ? board.createdBy : '-' }}</p>
-    </a>
-    <button (click)="deleteBoard(board?._id)">{{ 'boardItem.deleteBtn' | translate }}</button>
+  <ul class="board-list">
+    <li *ngFor="let board of filteredBoards" class="board-item">
+      <a [routerLink]="['/boards', board._id]">
+        <h2>{{board.title}}</h2>
+        <p>{{board.description}}</p>
+        <p>{{ 'boardItem.createdOn' | translate }} {{ board.createdAt ? (board.createdAt | date) : '-' }}</p>
+        <p>{{ 'boardItem.createdBy' | translate }} {{ board.createdBy ? board.createdBy : '-' }}</p>
+      </a>
+      <button (click)="deleteBoard(board?._id)">{{ 'boardItem.deleteBtn' | translate }}</button>
 
-  </li>
-</ul>
+    </li>
+  </ul>
 
-<div *ngIf="totalBoards === 0">{{ 'main.noBoardsFound' | translate }}</div>
+  <div *ngIf="totalBoards === 0">{{ 'main.noBoardsFound' | translate }}</div>
 
-<div *ngIf="totalBoards > 0">
-  <div class="pagination">
-    <button [disabled]="pageNumber === 1" (click)="onPageChange({ pageNumber: pageNumber - 1 })">{{ 'pagination.prevBtn'
-      |
-      translate }}</button>
-    <span>{{pageNumber}}</span>
-    <button [disabled]="pageNumber === totalPages" (click)="onPageChange({ pageNumber: pageNumber + 1 })">{{
-      'pagination.nextBtn' | translate }}</button>
+  <div *ngIf="totalBoards > 0">
+    <div class="pagination">
+      <button [disabled]="pageNumber === 1" (click)="onPageChange({ pageNumber: pageNumber - 1 })">{{
+        'pagination.prevBtn'
+        |
+        translate }}</button>
+      <span>{{pageNumber}}</span>
+      <button [disabled]="pageNumber === totalPages" (click)="onPageChange({ pageNumber: pageNumber + 1 })">{{
+        'pagination.nextBtn' | translate }}</button>
 
+    </div>
+    <div>{{ 'main.totalBoards' | translate:{ totalBoards: totalBoards } }}</div>
   </div>
-  <div>{{ 'main.totalBoards' | translate:{ totalBoards: totalBoards } }}</div>
-</div>
 
-<app-confirmation-modal #confirmationModal [title]="confirmationModalTitle"
-  [message]="'confirmationModal.message' | translate" [cancelButtonText]="'confirmationModal.cancelBtn' | translate"
-  [confirmButtonText]="'confirmationModal.confirmBtn' | translate"></app-confirmation-modal>
+  <app-confirmation-modal #confirmationModal [title]="confirmationModalTitle"
+    [message]="'confirmationModal.message' | translate" [cancelButtonText]="'confirmationModal.cancelBtn' | translate"
+    [confirmButtonText]="'confirmationModal.confirmBtn' | translate"></app-confirmation-modal>
+</section>
