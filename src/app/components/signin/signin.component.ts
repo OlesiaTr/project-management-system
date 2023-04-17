@@ -40,7 +40,6 @@ export class SigninComponent implements OnInit {
       .signin(this.signInForm.value.login, this.signInForm.value.password)
       .subscribe({
         next: (data) => {
-          console.log('data:', data);
           if (!data.token)
             return this.toast.showError('Error signing in. Please try again.');
 
@@ -49,7 +48,6 @@ export class SigninComponent implements OnInit {
           this.toast.showSuccess('You have successfully signed in!');
         },
         error: (err) => {
-          console.log(err);
           this.toast.showError('Error signing in. Please try again.');
         },
       });

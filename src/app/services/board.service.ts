@@ -47,7 +47,6 @@ export class BoardService {
   }
 
   createBoard(board: Board): Observable<Board> {
-    console.log('board:', board);
     this.token = this.authService.getToken() ?? '';
     const headers = this.getHeaders(this.token);
     return this.http
@@ -73,11 +72,9 @@ export class BoardService {
   }
 
   deleteBoardById(board: Board | string): Observable<Board> {
-    console.log('deleteBoardById()');
     this.token = this.authService.getToken() ?? '';
     const headers = this.getHeaders(this.token);
     const boardId = typeof board === 'string' ? board : board._id;
-    console.log(`${this.baseUrl}/${boardId}`);
     return this.http
       .delete<Board>(`${this.baseUrl}/${boardId}`, { headers })
       .pipe(
@@ -85,10 +82,8 @@ export class BoardService {
           // remove the board from localStorage
           const boards = JSON.parse(localStorage.getItem('boards') || '[]');
 
-          console.log('boards', boards);
           const updatedBoards = boards.filter((b: Board) => b._id !== boardId);
 
-          console.log('updatedBoards', updatedBoards);
           localStorage.setItem('boards', JSON.stringify(updatedBoards));
         }),
         catchError(handleError(this.toast, 'deleteBoardById', []))

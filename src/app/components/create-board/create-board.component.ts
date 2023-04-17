@@ -52,8 +52,6 @@ export class CreateBoardComponent implements OnInit {
       users,
     };
 
-    console.log('body:', body);
-
     const board = {
       title: name,
       owner: ownerId || '',
@@ -69,22 +67,16 @@ export class CreateBoardComponent implements OnInit {
           localStorage.getItem('boards') || '[]'
         );
 
-        console.log('res:', res);
-
         const newBoard = {
           _id: res._id,
           ...board,
         };
 
-        console.log('newBoard:', newBoard);
-
         const updatedBoards = [...existingBoards, newBoard];
 
         localStorage.setItem('boards', JSON.stringify(updatedBoards));
-        console.log('createBoard() success:', res);
       }),
       catchError((error) => {
-        console.log('createBoard() error:', error);
         handleError(error.message);
         return throwError(() => new Error(error.message));
       })

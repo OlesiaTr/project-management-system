@@ -17,17 +17,14 @@ export class ConfirmationModalComponent {
   constructor(private boardService: BoardService) {}
 
   open() {
-    console.log('ConfirmationModalComponent: open()');
     this.showModal = true;
   }
 
   close() {
-    console.log('ConfirmationModalComponent: close()');
     this.showModal = false;
   }
 
   confirm() {
-    console.log('ConfirmationModalComponent: confirm()');
     this.confirmAction();
     this.close();
   }
