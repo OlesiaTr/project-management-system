@@ -1,0 +1,8 @@
+<main class="welcome-container d-flex flex-column justify-content-center align-items-center">
+  <h1>{{ 'welcome.greeting' | translate }}</h1>
+  <h2>{{ 'welcome.developed' | translate }}</h2>
+  <p>{{ 'welcome.description' | translate }}</p>
+  <p>{{ 'welcome.loginSingup' | translate }}</p>
+  <button type="button" class="btn btn-primary" [routerLink]="['/signin']">{{ 'welcome.signIn' | translate }}</button>
+  <button type="button" class="btn btn-secondary" [routerLink]="['/signup']">{{ 'welcome.signUp' | translate }}</button>
+</main>

@@ -1,0 +1,13 @@
+<form [formGroup]="boardForm" class="board-form">
+  <label for="name" class="form-label">{{ 'formHandle.boardNameLabel' | translate }}</label>
+  <input type="text" formControlName="name" id="name" class="form-input">
+
+  <label for="description" class="form-label">{{ 'formHandle.boardDescriptionLabel' | translate }}</label>
+  <textarea formControlName="description" id="description" class="form-input"></textarea>
+
+  <label for="users" class="form-label">{{ 'formHandle.boardUsersLabel' | translate }}</label>
+  <input type="text" formControlName="users" id="users" class="form-input">
+
+  <button type="submit" (click)="onCreateBoard()" class="form-btn">{{ 'formHandle.createBoardBtn' | translate
+    }}</button>
+</form>

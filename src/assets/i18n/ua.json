@@ -1,0 +1,73 @@
+{
+  "header": {
+    "home": "Головна",
+    "about": "Про нас",
+    "editProfile": "Редагувати профіль",
+    "logout": "Вийти",
+    "createBoard": "Створити дошку",
+    "deleteUser": "Видалити користувача",
+    "deleteConfirmation": "Ви впевнені, що хочете видалити свій аккаунт? Цю дію не можна скасувати.",
+    "localization": "Локалізація",
+    "english": "Англійська",
+    "ukrainian": "Українська",
+    "russian": "Російська"
+  },
+  "footer": {
+    "github": "Мій Github"
+  },
+  "welcome": {
+    "greeting": "Ласкаво просимо до системи управління проектами!",
+    "developed": "Вона розроблена Олесею Требіною для RS School.",
+    "description": "Ця система призначена для допомоги управлінню проектами та контролю над термінами виконання завдань",
+    "loginSingup": "Увійти або зареєструватися",
+    "signIn": "Увійти",
+    "signUp": "Зареєструватися"
+  },
+  "main": {
+    "header": "Дошки",
+    "searchPlaceholder": "Пошук",
+    "clearBtn": "Очистити",
+    "noBoardsFound": "Дошок не знайдено.",
+    "totalBoards": "Всього дошок: {{totalBoards}}"
+  },
+  "pagination": {
+    "prevBtn": "Назад",
+    "nextBtn": "Вперед"
+  },
+  "boardItem": {
+    "createdOn": "Створено:",
+    "createdBy": "Створено користувачем:",
+    "deleteBtn": "Видалити"
+  },
+  "confirmationModal": {
+    "title": "Підтвердження",
+    "message": "Ви впевнені, що хочете видалити цю дошку?",
+    "cancelBtn": "Скасувати",
+    "confirmBtn": "Підтвердити"
+  },
+  "signIn": {
+    "title": "Увійти",
+    "signInBtn": "Увійти"
+  },
+  "signUp": {
+    "title": "Реєстрація",
+    "signUpBtn": "Зареєструватися"
+  },
+  "formHandle": {
+    "loginLabel": "Логін:",
+    "passwordLabel": "Пароль:",
+    "nameLabel": "Ваше ім'я",
+    "boardNameLabel": "Назва дошки",
+    "boardDescriptionLabel": "Опис дошки",
+    "boardUsersLabel": "Користувачі дошки",
+    "createBoardBtn": "Створити дошку"
+  },
+  "invalidInput": {
+    "nameRequired": "Ім'я є обов'язковим",
+    "invalidNameFormat": "Невірний формат імені",
+    "loginRequired": "Логін є обов'язковим",
+    "passwordRequired": "Пароль є обов'язковим",
+    "passwordMinLength": "Пароль повинен бути не менше {{requiredLength}} символів",
+    "passwordPattern": "Пароль повинен містити хоча б одну літеру та одну цифру."
+  }
+}

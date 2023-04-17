@@ -1,0 +1,45 @@
+<header class="header">
+  <nav class="header__nav">
+    <ul class="header__nav-list">
+      <li class="header__nav-item"><a href="#" class="header__nav-link">{{ 'header.home' | translate }}</a></li>
+    </ul>
+  </nav>
+
+  <div class="header__buttons">
+
+    <!-- Logout Button -->
+    <button *ngIf="isAuthenticated" class="header__button header__button--logout" (click)="logout()">{{ 'header.logout'
+      | translate }}</button>
+
+    <!-- Create Board Button -->
+    <button *ngIf="isAuthenticated" class="header__button header__button--create-board" (click)="createBoardBtn()">{{
+      'header.createBoard' | translate }}</button>
+
+    <ng-template #createBoardModal>
+      <div class="modal-header">
+        <h4 class="modal-title">{{ 'header.createBoard' | translate }}</h4>
+        <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <app-create-board></app-create-board>
+      </div>
+    </ng-template>
+
+    <!-- Delete User Button -->
+    <button *ngIf="isAuthenticated" class="header__button header__button--delete-user"
+      (click)="confirmationModal.open()">{{ 'header.deleteUser' | translate }}</button>
+
+    <!-- Confirmation Modal -->
+    <app-confirmation-modal #confirmationModal [message]="('header.deleteConfirmation' | translate)"
+      [confirmAction]="deleteUser"></app-confirmation-modal>
+
+    <!-- Localization Switcher -->
+    <select class="header__localization-switcher" (change)="changeLanguage($event)">
+      <option value="en">{{ 'header.english' | translate }}</option>
+      <option value="ua">{{ 'header.ukrainian' | translate }}</option>
+      <option value="ru">{{ 'header.russian' | translate }}</option>
+    </select>
+  </div>
+</header>

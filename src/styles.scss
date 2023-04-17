@@ -1,0 +1,18 @@
+/* You can add global styles to this file, and also import other style files */
+@import "ngx-toastr/toastr";
+@import "~bootstrap/dist/css/bootstrap.css";
+
+app-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+}
+
+app-footer {
+  background-color: #eee;
+  padding: 10px;
+}

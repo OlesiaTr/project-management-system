@@ -1,0 +1,19 @@
+<h1 class="display-4">{{ board.title }}</h1>
+<p class="lead">{{ board.description }}</p>
+
+<button class="btn btn-danger delete-board-btn" (click)="showModal = true">Delete Board</button>
+
+<app-confirmation-modal [message]="'Are you sure you want to delete this board?'" [title]="'Delete Board'"
+  [confirmButtonText]="'Delete'" [cancelButtonText]="'Cancel'" [showModal]="showModal" (close)="closeDeleteModal()"
+  [confirmAction]="onDeleteBoard" class="modal-container"></app-confirmation-modal>
+
+<app-modal [title]="'Add Column'" [showModal]="showCreateColumnModal" (close)="closeCreateColumnModal()">
+  <form (ngSubmit)="onCreateColumnSubmit($event)">
+    <div class="form-group">
+      <label for="newColumnName">Column Name:</label>
+      <input type="text" class="form-control" id="newColumnName" name="newColumnName" [(ngModel)]="newColumnName"
+        required>
+    </div>
+    <button type="submit" class="btn btn-primary">Add Column</button>
+  </form>
+</app-modal>

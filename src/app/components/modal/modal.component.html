@@ -1,0 +1,11 @@
+<div *ngIf="showModal">
+  <div (click)="onClose()" class="modal-background"></div>
+  <div class="modal-container">
+    <div class="modal-header">
+      <h2>{{ title }}</h2>
+      <button (click)="onClose()" class="close-button">×</button>
+    </div>
+    <div class="modal-body">
+      <ng-content></ng-content>
+    </div>
+  </div>
