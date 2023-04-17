@@ -28,7 +28,6 @@ export class BoardComponent implements OnInit {
   ngOnInit() {
     const boardId = this.route.snapshot.paramMap.get('_id');
     localStorage.setItem('boardId', boardId ?? '');
-    console.log('boardId:', boardId);
     if (boardId) {
       this.boardService.getBoardById(boardId).subscribe({
         next: (board: Board) => {
@@ -50,9 +49,7 @@ export class BoardComponent implements OnInit {
   }
 
   openCreateColumnModal() {
-    console.log('openCreateColumnModal()');
     this.showCreateColumnModal = true;
-    console.log('this.showCreateColumnModal:', this.showCreateColumnModal);
   }
 
   closeCreateColumnModal() {
@@ -65,17 +62,14 @@ export class BoardComponent implements OnInit {
   }
 
   onDeleteBoard() {
-    console.log('deleteBoard() board.ts');
     const boardId = localStorage.getItem('boardId')!;
-    this.boardService.deleteBoardById(boardId).subscribe((res) => {
-      console.log(res);
+    this.boardService.deleteBoardById(boardId).subscribe(() => {
       this.router.navigate(['/main']);
     });
   }
 
   onCreateColumnSubmit(event: any) {
     event.preventDefault();
-    console.log('onCreateColumnSubmit() board.ts');
     const boardId = localStorage.getItem('boardId')!;
 
     const newColumn: Column = {
@@ -84,16 +78,12 @@ export class BoardComponent implements OnInit {
     };
     this.columnService.createColumnInBoard(boardId, newColumn).subscribe({
       next: (column) => {
-        console.log('Column created:', column);
-        // Check if board.columns is defined
         if (this.board.columns) {
-          // Add the new column to the board object
           this.board.columns.push(column);
         } else {
           // If it's not defined, set it to an empty array and then push the new column
           this.board.columns = [column];
         }
-        // Close the modal
         this.closeCreateColumnModal();
       },
       error: (error) => {

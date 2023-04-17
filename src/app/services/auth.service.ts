@@ -28,7 +28,6 @@ export class AuthService {
 
     return this.http.post<ApiResponse>(`${apiUrl}/auth/signin`, body).pipe(
       tap((res: ApiResponse) => {
-        console.log('res:', res);
         if (res.token) {
           const userName = login;
           localStorage.setItem('userInfo', JSON.stringify({ userName }));
@@ -45,7 +44,6 @@ export class AuthService {
     password: string;
     login: string;
   }): Observable<any> {
-    console.log('signup function');
     const body = {
       name: signupData.name,
       password: signupData.password,
@@ -54,7 +52,6 @@ export class AuthService {
 
     return this.http.post<ApiResponse>(`${apiUrl}/auth/signup`, body).pipe(
       tap((res: ApiResponse) => {
-        console.log('res:', res._id);
 
         const userId = res._id;
         const userName = res.login;
@@ -77,7 +74,6 @@ export class AuthService {
   updateUser(user: User): Observable<any> {
     return this.http.put<ApiResponse>(`${apiUrl}/users/${user.id}`, user).pipe(
       tap((res: ApiResponse) => {
-        console.log('res:', res);
         const token = res.token;
         localStorage.setItem('token', token);
       }),
@@ -88,7 +84,6 @@ export class AuthService {
   deleteUser(user: User): Observable<any> {
     return this.http.delete<ApiResponse>(`${apiUrl}/users/${user.id}`).pipe(
       tap((res: ApiResponse) => {
-        console.log('res:', res);
         const token = res.token;
         localStorage.setItem('token', token);
       }),

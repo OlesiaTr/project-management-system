@@ -34,8 +34,6 @@ export class MainComponent implements OnInit {
 
   ngOnInit(): void {
     this.getBoards();
-    console.log('filteredBoards', this.filteredBoards);
-    console.log('totalBoards', this.totalBoards);
   }
 
   getBoards(): void {
@@ -48,16 +46,10 @@ export class MainComponent implements OnInit {
         this.filteredBoards = boards.slice(start, end);
         this.filterBoards();
         this.totalBoards = this.filteredBoards.length;
-
-        console.log('boards', boards);
-        console.log('filteredBoards', this.filteredBoards);
-        console.log('totalBoards', this.totalBoards);
       });
   }
 
   deleteBoard(_id: string | undefined) {
-    console.log('deleteBoard()');
-    console.log('_id:', _id);
     if (!_id) return;
 
     const board = { _id } as Board;
@@ -69,11 +61,9 @@ export class MainComponent implements OnInit {
     this.confirmationModal.confirmAction = () => {
       this.boardService.deleteBoardById(board).subscribe({
         next: () => {
-          console.log('Board deleted successfully');
           this.getBoards();
         },
         error: (err) => {
-          console.log('Error deleting board:', err);
           this.toast.showError(err.message);
         },
       });

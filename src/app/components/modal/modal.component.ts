@@ -10,10 +10,6 @@ export class ModalComponent {
   @Input() showModal: boolean = false;
   @Output() close = new EventEmitter<void>();
 
-  ngOnInit(): void {
-    console.log('app-modal component initialized');
-  }
-
   onClose() {
     this.showModal = false;
     this.close.emit();
